@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオン・ソースコード - biome.jsonのスキーマ</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" type="text/css" href="general.css">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body bgcolor="#FFF5D0">
+		<span class="desc">uploaded:2020/4/19　engine version:1.14.0.9</span>
+		<div align="left">
+			<h2>biome.jsonのスキーマ</h2>
+		</div>
+		<span class="pDat">Dat</span><span class="dir">../biomes/-.json</span>
+        <pre><code>{
+  "minecraft:climate": { --opt
+    "temperature": float,
+    "downfall": float
+    "snow_accumulation": [ float, float ]
+  },
+  "minecraft:overworld_height": { --opt
+    "noise_params": [ float, float ], --opt
+    "noise_type": str --opt
+  },
+  "minecraft:forced_features": { --opt
+    "first_pass": [ --opt
+      { --opt
+        "iterations": molang,
+        "scatter_chance": { --opt
+          "numerator": int,
+          "denominator": int
+        }
+        "scatter_chance": molang, --opt
+        "coordinate_eval_order": enumerated_value, [zyx]--opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "before_underground_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "underground_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "after_underground_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "before_surface_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "surface_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "after_surface_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "before_sky_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "sky_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "after_sky_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ],
+    "final_pass": [ --opt
+      {
+        "iterations": molang
+        "scatter_chance": { --opt 
+          "numerator": int,
+          "denominator": int
+        },
+        "scatter_chance": molang --opt
+        "coordinate_eval_order": enumerated_value, [zyx] --opt
+        "x": molang, --opt 
+        "x": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "z": molang, --opt 
+        "z": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "y": molang, --opt 
+        "y": { --opt
+          "distribution": enumerated_value, [uniform random gaussian(centered in the range) grid]
+          "step_count": int, --opt
+          "extent": [ molang, molang ]
+        },
+        "places_feature": feature_reference,
+        "identifier": str
+      }
+    ]
+  },
+  "minecraft:ignore_automatic_features":{}, --opt
+  "minecraft:overworld_surface": { --opt
+    "top_material": block_reference,
+    "mid_material": block_reference,
+    "floor_material": block_reference,
+    "foundation_material": block_reference,
+    "floor_depth": int
+  },
+  "minecraft:surface_material_adjustments": { --opt
+    "adjustments": [ --opt
+      {
+        "materials": {
+          "top_material": block_reference, --opt
+          "mid_material": block_reference, --opt
+          "floor_material": block_reference, --opt
+          "foundation_material": block_reference --opt
+        },
+        "noise_range": [ str/float, str/float ] [infinity]
+      }
+    ]
+  },
+  "minecraft:swamp_surface": { --opt
+    "top_material": block_reference,
+    "mid_material": block_reference,
+    "floor_material": block_reference,
+    "foundation_material": block_reference,
+    "floor_depth": int
+  },
+  "minecraft:frozen_ocean_surface": --opt
+    "top_material": block_reference,
+    "mid_material": block_reference,
+    "floor_material": block_reference,
+    "foundation_material": block_reference,
+    "floor_depth": int
+  },
+  "minecraft:mesa_surface": { --opt
+    "top_material": block_reference,
+    "mid_material": block_reference,
+    "floor_material": block_reference,
+    "foundation_material": block_reference,
+    "floor_depth": int,
+    "clay_material" block_reference,
+    "hard_clay_material": block_reference,
+    "bryce_pillars": bool,
+    "has_forest": bool
+  },
+  "minecraft:nether_surface": {}, --opt
+  "minecraft:the_end_surface": {}, --opt
+  "minecraft:world_generation_rules": { --opt
+    "hills_transformation": biome_reference, --opt 
+    "hills_transformation": [ --opt
+      biome_reference, --opt
+      [ --opt
+        biome_reference,
+        int
+      ]
+    ],
+    "mutate_transformation": biome_reference --opt
+    "mutate_transformation": [ --opt
+      biome_reference, --opt
+      [ --opt
+        biome_reference,
+        int
+      ]
+    ],
+    "generate_for_climates": [ --opt
+      [ enumerated_value, int ]
+    ],
+    "river_transformation": biome_reference, --opt
+    "river_transformation": [ --opt
+      biome_reference --opt
+      [ --opt
+        biome_reference
+        int
+      ]
+    ]
+    "shore_transformation": biome_reference --opt
+    "shore_transformation": [ --opt
+      biome_reference --opt
+      [ --opt
+        biome_reference,
+        int
+      ]
+    ]
+  },
+  "minecraft:legacy_world_generation_rules": {}, --opt
+  "[a-z0-9_.:]+": {}
+}</code></pre>
+        <div align="right"><span class="sch">Schema</span></div>
+        <div align="right"><span class="reg">constructed by: Masec Rinca</span></div>
+	</body>
+</html>

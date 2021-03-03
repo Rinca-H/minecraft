@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオン・ソースコード - 葉っぱも処理できるカットオール</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" type="text/css" href="general.css">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body bgcolor="#FFF5D0">
+		<span class="desc">uploaded:2020/4/10　engine version:1.14.30.2</span>
+		<div align="left">
+			<h2>葉っぱも処理できるカットオール</h2>
+		</div><br>
+		<h3>アニメーションコントローラー</h3>
+		<span>player.jsonと紐付けするのを忘れないでください。</span><br><br>
+		<span class="pDat">Dat</span><span class="dir">../animation_controllers/system.json</span>
+        <pre><code>{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.player_cutall_block": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "medium": "(1.0)" }
+          ],
+          "on_entry": [
+            "/function cut_acacia_logs",
+            "/function cut_big_oak_logs",
+            "/function cut_birch_logs",
+            "/function cut_jungle_logs",
+            "/function cut_oak_logs",
+            "/function cut_spruce_logs",
+            "/funcrion tag"//これの存在意義は分かりませんが、いちおう残してあります
+          ]
+        },
+        "medium": {
+          "transitions": [
+            { "default": "(1.0)" }
+          ],
+          "on_entry": [
+            "/function cut_acacia_logs",
+            "/function cut_big_oak_logs",
+            "/function cut_birch_logs",
+            "/function cut_jungle_logs",
+            "/function cut_oak_logs",
+            "/function cut_spruce_logs"
+          ]
+        }
+      }
+    },
+    "controller.animation.player_cutall_entity": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "medium": "(1.0)" }
+          ],
+          "on_entry": [
+            "/function remove_acacia_leaves",
+            "/function remove_big_oak_leaves",
+            "/function remove_birch_leaves",
+            "/function remove_jungle_leaves",
+            "/function remove_oak_leaves",
+            "/function remove_spruce_leaves"
+          ]
+        },
+        "medium": {
+          "transitions": [
+            { "default": "(1.0)" }
+          ],
+          "on_entry": [
+            "/function remove_acacia_leaves",
+            "/function remove_big_oak_leaves",
+            "/function remove_birch_leaves",
+            "/function remove_jungle_leaves",
+            "/function remove_oak_leaves",
+            "/function remove_spruce_leaves"
+          ]
+        }
+      }
+    }
+  }
+}</code></pre>
+        <div align="right"><span class="edd">Edited</span></div>
+        <br>
+        <h3>ファンクション</h3>
+		<span>「丸太」と「原木」が混在しているのはわたしのグローバルリソースの影響です。もちろん、両方指定する必要はありません。<br>
+        そしてもちろんアカシアだけではありませんが、名前などを変えるだけなので省略します。</span><br><br>
+        <span class="pDat">Dat</span><span class="dir">../functions/cut_acacia_logs.mcfunction</span>
+        <pre><code class="c">execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~1 ~ log2 0 fill ~ ~1 ~ ~ ~1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~1 ~ log2 0 fill ~1 ~1 ~ ~1 ~1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~1 ~ log2 0 fill ~-1 ~1 ~ ~-1 ~1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~1 ~1 log2 0 fill ~ ~1 ~1 ~ ~1 ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~1 ~-1 log2 0 fill ~ ~1 ~-1 ~ ~1 ~-1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~-1 ~ log2 0 fill ~ ~-1 ~ ~ ~-1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~-1 ~ log2 0 fill ~1 ~-1 ~ ~1 ~-1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~-1 ~ log2 0 fill ~-1 ~-1 ~ ~-1 ~-1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~-1 ~1 log2 0 fill ~ ~-1 ~1 ~ ~-1 ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~-1 ~-1 log2 0 fill ~ ~-1 ~-1 ~ ~-1 ~-1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~ ~ log2 0 fill ~1 ~ ~ ~1 ~ ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~1 ~ log2 0 fill ~1 ~1 ~ ~1 ~1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~-1 ~ log2 0 fill ~1 ~-1 ~ ~1 ~-1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~ ~1 log2 0 fill ~1 ~ ~1 ~1 ~ ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~ ~-1 log2 0 fill ~1 ~ ~-1 ~1 ~ ~-1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~1 ~ log2 0 fill ~-1 ~1 ~ ~-1 ~1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~-1 ~ log2 0 fill ~-1 ~-1 ~ ~-1 ~-1 ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~ ~ log2 0 fill ~-1 ~ ~ ~-1 ~ ~ air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~ ~1 log2 0 fill ~-1 ~ ~1 ~-1 ~ ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~ ~-1 log2 0 fill ~-1 ~ ~-1 ~-1 ~ ~-1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~ ~1 log2 0 fill ~ ~ ~1 ~ ~ ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~ ~1 log2 0 fill ~1 ~ ~1 ~1 ~ ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~ ~1 log2 0 fill ~-1 ~ ~1 ~-1 ~ ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~1 ~1 log2 0 fill ~ ~1 ~1 ~ ~1 ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~-1 ~1 log2 0 fill ~ ~-1 ~1 ~ ~-1 ~1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~ ~-1 log2 0 fill ~ ~ ~-1 ~ ~ ~-1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~1 ~ ~-1 log2 0 fill ~1 ~ ~-1 ~1 ~ ~-1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~-1 ~ ~-1 log2 0 fill ~-1 ~ ~-1 ~-1 ~ ~-1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~1 ~-1 log2 0 fill ~ ~1 ~-1 ~ ~1 ~-1 air 0 destroy
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~-1 ~-1 log2 0 fill ~ ~-1 ~-1 ~ ~-1 ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~1 ~ log2 0 fill ~ ~1 ~ ~ ~1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~1 ~ log2 0 fill ~1 ~1 ~ ~1 ~1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~1 ~ log2 0 fill ~-1 ~1 ~ ~-1 ~1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~1 ~1 log2 0 fill ~ ~1 ~1 ~ ~1 ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~1 ~-1 log2 0 fill ~ ~1 ~-1 ~ ~1 ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~-1 ~ log2 0 fill ~ ~-1 ~ ~ ~-1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~-1 ~ log2 0 fill ~1 ~-1 ~ ~1 ~-1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~-1 ~ log2 0 fill ~-1 ~-1 ~ ~-1 ~-1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~-1 ~1 log2 0 fill ~ ~-1 ~1 ~ ~-1 ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~-1 ~-1 log2 0 fill ~ ~-1 ~-1 ~ ~-1 ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~ ~ log2 0 fill ~1 ~ ~ ~1 ~ ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~1 ~ log2 0 fill ~1 ~1 ~ ~1 ~1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~-1 ~ log2 0 fill ~1 ~-1 ~ ~1 ~-1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~ ~1 log2 0 fill ~1 ~ ~1 ~1 ~ ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~ ~-1 log2 0 fill ~1 ~ ~-1 ~1 ~ ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~1 ~ log2 0 fill ~-1 ~1 ~ ~-1 ~1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~-1 ~ log2 0 fill ~-1 ~-1 ~ ~-1 ~-1 ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~ ~ log2 0 fill ~-1 ~ ~ ~-1 ~ ~ air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~ ~1 log2 0 fill ~-1 ~ ~1 ~-1 ~ ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~ ~-1 log2 0 fill ~-1 ~ ~-1 ~-1 ~ ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~ ~1 log2 0 fill ~ ~ ~1 ~ ~ ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~ ~1 log2 0 fill ~1 ~ ~1 ~1 ~ ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~ ~1 log2 0 fill ~-1 ~ ~1 ~-1 ~ ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~1 ~1 log2 0 fill ~ ~1 ~1 ~ ~1 ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~-1 ~1 log2 0 fill ~ ~-1 ~1 ~ ~-1 ~1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~ ~-1 log2 0 fill ~ ~ ~-1 ~ ~ ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~1 ~ ~-1 log2 0 fill ~1 ~ ~-1 ~1 ~ ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~-1 ~ ~-1 log2 0 fill ~-1 ~ ~-1 ~-1 ~ ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~1 ~-1 log2 0 fill ~ ~1 ~-1 ~ ~1 ~-1 air 0 destroy
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~-1 ~-1 log2 0 fill ~ ~-1 ~-1 ~ ~-1 ~-1 air 0 destroy
+execute @e[name="アカシアの丸太",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ dirt 0 summon masec01:cutall_entity ~ ~5 ~ cut_log
+execute @e[name="アカシアの丸太",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ grass 0 summon masec01:cutall_entity ~ ~5 ~ cut_log
+execute @e[name="アカシアの原木",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ dirt 0 summon masec01:cutall_entity ~ ~5 ~ cut_log
+execute @e[name="アカシアの原木",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ grass 0 summon masec01:cutall_entity ~ ~5 ~ cut_log</code></pre>
+        <span>理論上６方向だけでいいんですが、アイテムがドロップするときにドロップする位置がずれることがあるのを考慮して、ななめの位置の分も検知しています。</span><br>
+        <br><br>
+        <span class="pDat">Dat</span><span class="dir">../functions/remove_acacia_leaves.mcfunction</span>
+        <pre><code class="c">execute @e[name="アカシアの丸太",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ dirt 0 summon masec01:cutall_entity ~ ~5 ~ acacia
+execute @e[name="アカシアの丸太",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ grass 0 summon masec01:cutall_entity ~ ~5 ~ acacia
+execute @e[name="アカシアの原木",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ dirt 0 summon masec01:cutall_entity ~ ~5 ~ acacia
+execute @e[name="アカシアの原木",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ grass 0 summon masec01:cutall_entity ~ ~5 ~ acacia
+execute @e[name="アカシアの丸太",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ dirt 0 summon masec01:cutall_entity ~ ~5 ~ cut_log
+execute @e[name="アカシアの丸太",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ grass 0 summon masec01:cutall_entity ~ ~5 ~ cut_log
+execute @e[name="アカシアの原木",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ dirt 0 summon masec01:cutall_entity ~ ~5 ~ cut_log
+execute @e[name="アカシアの原木",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ grass 0 summon masec01:cutall_entity ~ ~5 ~ cut_log
+execute @e[name="アカシアの丸太"] ~ ~ ~ detect ~ ~1 ~ leaves2 -1 summon masec01:cutall_entity ~ ~5 ~ acacia
+execute @e[name="アカシアの原木"] ~ ~ ~ detect ~ ~1 ~ leaves2 -1 summon masec01:cutall_entity ~ ~5 ~ acacia
+execute @e[name="アカシアの丸太",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ dirt 0 tag @e[name="アカシアの丸太"] add cutfinish 
+execute @e[name="アカシアの丸太",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ grass 0 tag @e[name="アカシアの丸太"] add cutfinish 
+execute @e[name="アカシアの原木",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ dirt 0 tag @e[name="アカシアの原木"] add cutfinish 
+execute @e[name="アカシアの原木",tag=!cutfinish] ~ ~ ~ detect ~ ~-1 ~ grass 0 tag @e[name="アカシアの原木"] add cutfinish</code></pre>
+        <br><br>
+        <h3>エンティティ</h3><br>
+        <span class="pDat">Dat</span><span class="dir">../entities/cutall_entity.json</span>
+        <pre><code>{
+  "format_version": "1.8.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "masec01:cutall_entity",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    
+    "component_groups": {
+      "vanish": {
+        "minecraft:transformation": {
+          "into": "minecraft:item"
+        }
+        //アイテムになると、パッと消えるのでパーティクルや音が出ないんですが、特異な状態で残ってしまうことがあるのでtp-killの方法をおすすめします
+      },
+      "acacia": {
+        "minecraft:collision_box": {
+          "width": 10,
+          "height": 5
+        },
+        "minecraft:break_blocks": {
+          "breakable_blocks": [ "leaves2" ]
+        }
+      },
+      "big_oak": {
+        "minecraft:collision_box": {
+          "width": 4.5,
+          "height": 5
+        },
+        "minecraft:break_blocks": {
+          "breakable_blocks": [ "leaves2" ]
+        }
+      },
+      "birch": {
+        "minecraft:collision_box": {
+          "width": 4.5,
+          "height": 5
+        },
+        "minecraft:break_blocks": {
+          "breakable_blocks": [ "leaves" ]
+        }
+      },
+      "jungle": {
+        "minecraft:collision_box": {
+          "width": 4.5,
+          "height": 7
+        },
+        "minecraft:break_blocks": {
+          "breakable_blocks": [ "leaves" ]
+        }
+      },
+      "oak": {
+        "minecraft:collision_box": {
+          "width": 4.5,
+          "height": 6
+        },
+        "minecraft:break_blocks": {
+          "breakable_blocks": [ "leaves" ]
+        }
+      },
+      "spruce": {
+        "minecraft:collision_box": {
+          "width": 5.5,
+          "height": 8
+        },
+        "minecraft:break_blocks": {
+          "breakable_blocks": [ "leaves" ]
+        }
+      },
+      "cut_log": {
+        "minecraft:collision_box": {
+          "width": 1.5,
+          "height": 10
+        },
+        "minecraft:break_blocks": {
+          "breakable_blocks": [ "log", "log2" ]
+        }
+      }//functionで壊しきれない分の補助
+    },
+    
+    "components":{
+      "minecraft:collision_box": {
+        "width": 4.5,
+        "height": 5
+      },
+      "minecraft:timer": {
+        "looping": false,
+        "time": 3.0,
+        "time_down_event": {
+          "event": "vanish",
+          "target": "self"
+        }
+      },
+      "minecraft:fire_immune": true,
+      //↑意外と重要なコンポーネントです　ないと火事になっている木を切ったときに炎が見えてしまいます
+      "minecraft:damage_sensor": [
+        {
+          "cause": "all",
+          "deals_damage": false
+        }
+      ],
+      "minecraft:physics": {
+        "has_collision": false,
+        "has_gravity": true
+      },
+      //どんな高さの木にも対応できるように予め高い位置に出現させるので、落下させる必要があります
+      "minecraft:break_blocks": {
+        "breakable_blocks": [ "leaves", "leaves2" ]
+      }
+    },
+    
+    "events": {
+      "vanish": {
+        "add": {
+          "component_groups": [ "vanish" ]
+        }
+      },
+      "acacia": {
+        "add": {
+          "component_groups": [ "acacia" ]
+        }
+      },
+      "big_oak": {
+        "add": {
+          "component_groups": [ "big_oak" ]
+        }
+      },
+      "birch": {
+        "add": {
+          "component_groups": [ "birch" ]
+        }
+      },
+      "jungle": {
+        "add": {
+          "component_groups": [ "jungle" ]
+        }
+      },
+      "oak": {
+        "add": {
+          "component_groups": [ "oak" ]
+        }
+      },
+      "spruce": {
+        "add": {
+          "component_groups": [ "spruce" ]
+        }
+      },
+      "cut_log": {
+        "add": {
+          "component_groups": [ "cut_log" ]
+        }
+      }
+    }
+  }
+}</code></pre>
+<div align="right"><span class="reg">constructed by: Masec Rinca</span></div>
+	</body>
+</html>

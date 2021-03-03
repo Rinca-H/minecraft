@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<title>サブページ記事 - BlockStatesの正体</title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+	<link rel="stylesheet" type="text/css" href="general.css">
+	<meta name="viewport" content="width=device-width">
+</head>
+<body bgcolor="#FFF5D0">
+	<span class="desc">uploaded:2020/4/19　engine version:1.14.0.9</span>
+	<div align="left">
+		<h2>BlockStatesの正体</h2>
+	</div>
+	<br>
+	<span>　長い間、リファレンスに載っているのに利用の方法が全くわからないのは歯がゆいものでした。もしかしたらとても有能で、使えたら一気にできることが増えるかもしれないのに、知らずに放置するのはかなりもったいないです。
+		<br>　そして今回は謎が解けたので紹介していきたいと思います。
+		<br><br>　BlockStatesもといブロックステートとは、データ値をタグのように扱うものだったのです。バイオームやフィーチャーの作り方の記事に詳しい使い方を説明を載せるので、今回はどんなプロパティがあるかのリファレンスということにします。
+		<br>基本的にはこのような形をとります。</span><br><br>
+	<pre><code>{
+		"name": str,
+		"states": {
+		"": str,
+		"": int,
+		...
+		}
+		}</code></pre>
+	nameはブロックのアイデンティファイア、statesの中身はそれぞれブロックによって決まったプロパティと値の組が入ります。<br>
+	<h3>■ minecraft:stone</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#542E00">
+		<tr>
+			<th>状態</th><th>データ値</th><th>stone_type</th>
+		</tr>
+		<tr>
+			<td>石</td><td>0</td><td> </td>
+		</tr>
+		<tr>
+			<td>花崗岩</td><td>1</td><td>granite</td>
+		</tr>
+		<tr>
+			<td>磨かれた花崗岩</td><td>2</td><td>granite_smooth</td>
+		</tr>
+		<tr>
+			<td>閃緑岩</td><td>3</td><td>diorite</td>
+		</tr>
+		<tr>
+			<td>磨かれた閃緑岩</td><td>4</td><td>diorite_smooth</td>
+		</tr>
+		<tr>
+			<td>安山岩</td><td>5</td><td>andesite</td>
+		</tr>
+		<tr>
+			<td>磨かれた安山岩</td><td>6</td><td>andesite_smooth</td>
+		</tr>
+	</table>
+	<br>
+	これで閃緑岩を指定したいのであれば、こう書きます：<br>
+	<pre><code>{
+		"name": "minecraft:stone",
+		"states": {
+		"stone_type": "diorite"
+		}
+		}</code></pre>
+	以降同じような書き方、表との照らし合わせ方をします。
+	<h3>■ minecraft:dirt</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>dirt_type</th>
+		</tr>
+		<tr>
+			<td>土</td><td>0</td><td> </td>
+		</tr>
+		<tr>
+			<td>粗い土</td><td>1</td><td>coarsed</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:planks / minecraft:wood / minecraft:wooden_slab / minecraft:fence</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>wood_type</th>
+		</tr>
+		<tr>
+			<td>樫</td><td>0</td><td>oak</td>
+		</tr>
+		<tr>
+			<td>トウヒ</td><td>1</td><td>sprace</td>
+		</tr>
+		<tr>
+			<td>樺</td><td>2</td><td>birch</td>
+		</tr>
+		<tr>
+			<td>ジャングル</td><td>3</td><td>jungle</td>
+		</tr>
+		<tr>
+			<td>アカシア</td><td>4</td><td>acacia</td>
+		</tr>
+		<tr>
+			<td>黒樫</td><td>5</td><td>dark_oak</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:sand</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>sand_type</th>
+		</tr>
+		<tr>
+			<td>砂</td><td>0</td><td> </td>
+		</tr>
+		<tr>
+			<td>赤砂</td><td>1</td><td>red</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:sponge</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>sponge_type</th>
+		</tr>
+		<tr>
+			<td>スポンジ</td><td>0</td><td>dry</td>
+		</tr>
+		<tr>
+			<td>ぬれたスポンジ</td><td>1</td><td>wet</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:sandstone / minecraft:red_sandstone</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>sand_stone_type</th>
+		</tr>
+		<tr>
+			<td>砂岩</td><td>0</td><td>default</td>
+		</tr>
+		<tr>
+			<td>模様入り砂岩</td><td>1</td><td>heiroglyphs</td>
+		</tr>
+		<tr>
+			<td>カットされた砂岩</td><td>2</td><td>cut</td>
+		</tr>
+		<tr>
+			<td>なめらか砂岩</td><td>3</td><td>smooth</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:wool / (色系のものはだいたいすべて)</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>color</th>
+		</tr>
+		<tr>
+			<td>白</td><td>0</td><td>white</td>
+		</tr>
+		<tr>
+			<td>オレンジ</td><td>1</td><td>orange</td>
+		</tr>
+		<tr>
+			<td>赤紫</td><td>2</td><td>magenta</td>
+		</tr>
+		<tr>
+			<td>空色</td><td>3</td><td>light_blue</td>
+		</tr>
+		<tr>
+			<td>黄色</td><td>4</td><td>yellow</td>
+		</tr>
+		<tr>
+			<td>黄緑</td><td>5</td><td>lime</td>
+		</tr>
+		<tr>
+			<td>ピンク</td><td>6</td><td>pink</td>
+		</tr>
+		<tr>
+			<td>灰色</td><td>7</td><td>gray</td>
+		</tr>
+		<tr>
+			<td>薄灰色</td><td>8</td><td>light_gray</td>
+		</tr>
+		<tr>
+			<td>水色</td><td>9</td><td>cyan</td>
+		</tr>
+		<tr>
+			<td>紫</td><td>10</td><td>purple</td>
+		</tr>
+		<tr>
+			<td>青</td><td>11</td><td>blue</td>
+		</tr>
+		<tr>
+			<td>茶</td><td>12</td><td>brown</td>
+		</tr>
+		<tr>
+			<td>緑</td><td>13</td><td>green</td>
+		</tr>
+		<tr>
+			<td>赤</td><td>14</td><td>red</td>
+		</tr>
+		<tr>
+			<td>黒</td><td>15</td><td>black</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:stone_slab</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>stone_slab_type</th>
+		</tr>
+		<tr>
+			<td>なめらか石</td><td>0</td><td>smooth_stone</td>
+		</tr>
+		<tr>
+			<td>砂岩</td><td>1</td><td>sandstone</td>
+		</tr>
+		<tr>
+			<td>石(見た目は樫)</td><td>2</td><td>wood</td>
+		</tr>
+		<tr>
+			<td>丸石</td><td>3</td><td>cobblestone</td>
+		</tr>
+		<tr>
+			<td>レンガ</td><td>4</td><td>brick</td>
+		</tr>
+		<tr>
+			<td>石レンガ</td><td>5</td><td>stone_brick</td>
+		</tr>
+		<tr>
+			<td>クォーツ</td><td>6</td><td>quartz</td>
+		</tr>
+		<tr>
+			<td>ネザーレンガ</td><td>7</td><td>nether_brick</td>
+		</tr>
+	</table>
+	<h4>◎top_slot_bit(bool)</h4>
+	上付きかどうか。データ値8から15は上付きとなり、このプロパティがtrueになります。
+	<h3>■ minecraft:stone_slab2</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>stone_slab_type_2</th>
+		</tr>
+		<tr>
+			<td>赤砂岩</td><td>0</td><td>red_sandstone</td>
+		</tr>
+		<tr>
+			<td>プルプァ</td><td>1</td><td>purpur</td>
+		</tr>
+		<tr>
+			<td>プリズマリン</td><td>2</td><td>prismarine_rough</td>
+		</tr>
+		<tr>
+			<td>ダークプリズマリン</td><td>3</td><td>prismarine_dark</td>
+		</tr>
+		<tr>
+			<td>プリズマリンレンガ</td><td>4</td><td>prismarine_brick</td>
+		</tr>
+		<tr>
+			<td>苔むした丸石</td><td>5</td><td>mossy_cobblestone</td>
+		</tr>
+		<tr>
+			<td>なめらか砂岩</td><td>6</td><td>smooth_sandstone</td>
+		</tr>
+		<tr>
+			<td>赤いネザーレンガ</td><td>7</td><td>red_nether_brick</td>
+		</tr>
+	</table>
+	<h4>◎top_slot_bit(bool)</h4>
+	上付きかどうか。データ値8から15は上付きとなり、このプロパティがtrueになります。
+	<h3>■ minecraft:stone_slab3</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>stone_slab_type_3</th>
+		</tr>
+		<tr>
+			<td>エンドストーンレンガ</td><td>0</td><td>endstone_brick</td>
+		</tr>
+		<tr>
+			<td>なめらか赤砂岩</td><td>1</td><td>smooth_red_sandstone</td>
+		</tr>
+		<tr>
+			<td>磨かれた安山岩</td><td>2</td><td>polished_andesite</td>
+		</tr>
+		<tr>
+			<td>安山岩</td><td>3</td><td>andesite</td>
+		</tr>
+		<tr>
+			<td>閃緑岩</td><td>4</td><td>diorite</td>
+		</tr>
+		<tr>
+			<td>磨かれた閃緑岩</td><td>5</td><td>polished_diorite</td>
+		</tr>
+		<tr>
+			<td>花崗岩</td><td>6</td><td>granite</td>
+		</tr>
+		<tr>
+			<td>磨かれた花崗岩</td><td>7</td><td>polished_granite</td>
+		</tr>
+	</table>
+	<h4>◎top_slot_bit(bool)</h4>
+	上付きかどうか。データ値8から15は上付きとなり、このプロパティがtrueになります。
+	<h3>■ minecraft:stone_slab4</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>stone_slab_type_4</th>
+		</tr>
+		<tr>
+			<td>苔むした石レンガ</td><td>0</td><td>mossy_stone_brick</td>
+		</tr>
+		<tr>
+			<td>なめらかクォーツ</td><td>1</td><td>smooth_quartz</td>
+		</tr>
+	</table>
+	<h4>◎top_slot_bit(bool)</h4>
+	上付きかどうか。データ値8から15は上付きとなり、このプロパティがtrueになります。
+	<h3>■ minecraft:cobblestone_wall</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>wall_block_type</th>
+		</tr>
+		<tr>
+			<td>丸石</td><td>0</td><td>cobblestone</td>
+		</tr>
+		<tr>
+			<td>苔むした丸石</td><td>1</td><td>mossy_cobblestone</td>
+		</tr>
+		<tr>
+			<td>花崗岩</td><td>2</td><td>granite</td>
+		</tr>
+		<tr>
+			<td>閃緑岩</td><td>3</td><td>diorite</td>
+		</tr>
+		<tr>
+			<td>安山岩</td><td>4</td><td>andesite</td>
+		</tr>
+		<tr>
+			<td>砂岩</td><td>5</td><td>sandstone</td>
+		</tr>
+		<tr>
+			<td>レンガ</td><td>6</td><td>brick</td>
+		</tr>
+		<tr>
+			<td>石レンガ</td><td>7</td><td>stone_brick</td>
+		</tr>
+		<tr>
+			<td>苔むした石レンガ</td><td>8</td><td>mossy_stone_brick</td>
+		</tr>
+		<tr>
+			<td>ネザーレンガ</td><td>9</td><td>nether_brick</td>
+		</tr>
+		<tr>
+			<td>エンドストーンレンガ</td><td>10</td><td>end_brick</td>
+		</tr>
+		<tr>
+			<td>プリズマリン</td><td>11</td><td>prismarine</td>
+		</tr>
+		<tr>
+			<td>赤砂岩</td><td>12</td><td>red_sand_stone</td>
+		</tr>
+		<tr>
+			<td>赤いネザーレンガ</td><td>13</td><td>red_nether_brick</td>
+		</tr>
+	</table>
+	<h4>◎wall_connection_type_east(str):none</h4>
+	<h4>◎wall_connection_type_north(str):none</h4>
+	<h4>◎wall_connection_type_south(str):none</h4>
+	<h4>◎wall_connection_type_west(str):none</h4>
+	<h3>■ minecraft:anvil</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>damage</th>
+		</tr>
+		<tr>
+			<td> </td><td>0</td><td>undamaged</td>
+		</tr>
+		<tr>
+			<td>少し壊れた</td><td>4</td><td>slightly_damaged</td>
+		</tr>
+		<tr>
+			<td>かなり壊れた</td><td>8</td><td>very_damaged</td>
+		</tr>
+	</table>
+	<h4>◎direction(int)</h4>
+	向き。値はデータ値がもとになってると思います。
+	<h3>■ minecraft:stone_brick</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>stone_brick_type</th>
+		</tr>
+		<tr>
+			<td>　</td><td>0</td><td>default</td>
+		</tr>
+		<tr>
+			<td>苔むした</td><td>1</td><td>mossy</td>
+		</tr>
+		<tr>
+			<td>ひび割れた</td><td>2</td><td>cracked</td>
+		</tr>
+		<tr>
+			<td>模様入り</td><td>3</td><td>chiseled</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:quartz_block</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>chisel_type</th>
+		</tr>
+		<tr>
+			<td>　</td><td>0</td><td>default</td>
+		</tr>
+		<tr>
+			<td>苔むした</td><td>1</td><td>lines</td>
+		</tr>
+		<tr>
+			<td>ひび割れた</td><td>2</td><td>chiseled</td>
+		</tr>
+		<tr>
+			<td>模様入り</td><td>3</td><td>smooth</td>
+		</tr>
+	</table>
+	<h4>◎pillar_axis(str)</h4>
+	軸の向き。値はx,y,z,unknownのいずれかだと思います。
+	<h3>■ minecraft:prismarine</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>prismarine_block_type</th>
+		</tr>
+		<tr>
+			<td>　</td><td>0</td><td>default</td>
+		</tr>
+		<tr>
+			<td>ダーク</td><td>1</td><td>dark</td>
+		</tr>
+		<tr>
+			<td>レンガ</td><td>2</td><td>bricks</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:coral_block / minecraft:coral / minecraft:coral_fan / minecraft:coral_fan_dead</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>coral_color</th>
+		</tr>
+		<tr>
+			<td>青</td><td>0</td><td>blue</td>
+		</tr>
+		<tr>
+			<td>ピンク</td><td>1</td><td>pink</td>
+		</tr>
+		<tr>
+			<td>紫</td><td>2</td><td>purple</td>
+		</tr>
+		<tr>
+			<td>赤</td><td>3</td><td>red</td>
+		</tr>
+		<tr>
+			<td>黄色</td><td>4</td><td>yellow</td>
+		</tr>
+	</table>
+	<h4>◎dead_bit(bool)</h4>
+	死んでいるかどうか。8から12はtrueになります。coral_fanとcoral_fan_deadにはこのプロパティはありません。
+	<h3>■ minecraft:tallgrass</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>tall_grass_type</th>
+		</tr>
+		<tr>
+			<td>　</td><td>0</td><td> </td>
+		</tr>
+		<tr>
+			<td>草</td><td>1</td><td>tall</td>
+		</tr>
+		<tr>
+			<td>シダ</td><td>2</td><td>fern</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:red_flower</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>flower_type</th>
+		</tr>
+		<tr>
+			<td>ポピー</td><td>0</td><td>poppy</td>
+		</tr>
+		<tr>
+			<td>ヒスイラン</td><td>1</td><td>orchid</td>
+		</tr>
+		<tr>
+			<td>アリウム</td><td>2</td><td>allium</td>
+		</tr>
+		<tr>
+			<td>ヒナソウ</td><td>3</td><td>noustonia</td>
+		</tr>
+		<tr>
+			<td>赤いチューリップ</td><td>4</td><td>turip_red</td>
+		</tr>
+		<tr>
+			<td>オレンジのチューリップ</td><td>5</td><td>turip_orange</td>
+		</tr>
+		<tr>
+			<td>白いチューリップ</td><td>6</td><td>turip_white</td>
+		</tr>
+		<tr>
+			<td>ピンクのチューリップ</td><td>7</td><td>turip_pink</td>
+		</tr>
+		<tr>
+			<td>フランスギク</td><td>8</td><td>oxeye</td>
+		</tr>
+		<tr>
+			<td>ヤグルマギク</td><td>9</td><td>cornflower</td>
+		</tr>
+		<tr>
+			<td>スズラン</td><td>10</td><td>lily_of_the_valley</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:spawn_egg</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>spawn_egg_stone_type</th>
+		</tr>
+		<tr>
+			<td>石</td><td>0</td><td>stone</td>
+		</tr>
+		<tr>
+			<td>丸石</td><td>1</td><td>cobblestone</td>
+		</tr>
+		<tr>
+			<td>石レンガ</td><td>2</td><td>stone_brick</td>
+		</tr>
+		<tr>
+			<td>苔むした石レンガ</td><td>3</td><td>mossy_stone_brick</td>
+		</tr>
+		<tr>
+			<td>ひび割れた石レンガ</td><td>4</td><td>cracked_stone_brick</td>
+		</tr>
+		<tr>
+			<td>模様付き石レンガ</td><td>5</td><td>chiseled_stone_brick</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:double_plant</h3>
+	<table border="4" cellpadding="10" bgcolor="#FFFBE8" bordercolor="#281600">
+		<tr>
+			<th>状態</th><th>データ値</th><th>double_plant_type</th>
+		</tr>
+		<tr>
+			<td>ヒマワリ</td><td>0</td><td>sun_flower</td>
+		</tr>
+		<tr>
+			<td>ライラック</td><td>1</td><td>syringa</td>
+		</tr>
+		<tr>
+			<td>草</td><td>2</td><td>grass</td>
+		</tr>
+		<tr>
+			<td>シダ</td><td>3</td><td>fern</td>
+		</tr>
+		<tr>
+			<td>バラ</td><td>4</td><td>rose</td>
+		</tr>
+		<tr>
+			<td>ボタン</td><td>5</td><td>paeonia</td>
+		</tr>
+	</table>
+	<h3>■ minecraft:brown_mushroom_block / minecraft:red_mushroom_block</h3>
+	<h4>◎huge_mushroom_bits(int)</h4>
+	どの面をはげさせるか。データ値がもとになっていると思います。
+	<h3>■ minecraft:end_portal_frame</h3>
+	<h4>◎direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h4>◎end_portal_eye_bit(bool)</h4>
+	エンダーアイがはまっているかどうか。
+	<h3>■ minecraft:grindstone</h3>
+	<h4>◎attachment(str):standing</h4>
+	<h4>◎direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h3>■ minecraft:lantern</h3>
+	<h4>◎hanging(bool)</h4>
+	ぶら下がっているかどうか。
+	<h3>■ minecraft:piston / minecraft:ladder / minecraft:end_rod</h3>
+	<h4>◎facing_direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h3>■ minecraft:vine</h3>
+	<h4>◎vine_direction_bits(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h3>■ minecraft:snow</h3>
+	<h4>◎covered_bit(bool)</h4>
+	<h4>◎height(int)</h4>
+	高さ。おそらく9以上はなさそうです。
+	<h3>■ minecraft:respawn_anchor</h3>
+	<h4>◎respawn_anchor_charge(int)</h4>
+	チャージの量。おそらく5以上はなさそうです。
+	<h3>■ minecraft:beehive / minecraft:bee_nest</h3>
+	<h4>◎facing_direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h4>◎honey_lvel(int)</h4>
+	はちみつの量。
+	<h3>■ minecraft:log</h3>
+	<h4>◎old_log_type(str)</h4>
+	木の種類。木材と値は同じだと思います。
+	<h4>◎pillar_axis(str)</h4>
+	軸の向き。データ値がもとになっていると思います。
+	<h3>■ minecraft:wooden_button / (その他ボタン)</h3>
+	<h4>◎facing_direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h4>◎button_pressed_bit(bool)</h4>
+	ボタンが押されているかどうか。
+	<h3>■ minecraft:trapdoor</h3>
+	<h4>◎direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h4>◎open_bit(bool)</h4>
+	開いているかどうか。
+	<h4>◎upside_down_bit(bool)</h4>
+	逆さかどうか。正直どっちが上なのかわからないです。
+	<h3>■ minecraft:scaffolding</h3>
+	<h4>◎stability(int)</h4>
+	<h4>◎stability_check(bool)</h4>
+	<h3>■ minecraft:rail</h3>
+	<h4>◎rail_direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h3>■ minecraft:golden_rail</h3>
+	<h4>◎rail_direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h4>◎rail_data_bit(bool)</h4>
+	<h3>■ minecraft:torch / minecraft:redstone_torch</h3>
+	<h4>◎torch_facing_direction(str)</h4>
+	向き。データ値がもとになっていると思います。これはunknownしか値を知りません。
+	<h3>■ minecraft:chorus_flower / minecraft:fire / minecraft:blue_fire</h3>
+	<h4>◎age(int)</h4>
+	<h3>■ minecraft:leaves</h3>
+	<h4>◎old_leaf_type(str)</h4>
+	葉っぱの種類。logと同じ値だと思います。
+	<h4>◎persistent_bit(bool)</h4>
+	<h4>◎update_bit(bool)</h4>
+	<h3>■ minecraft:lectern</h3>
+	<h4>◎direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h4>◎powered_bit(bool)</h4>
+	<h3>■ minecraft:lever</h3>
+	<h4>◎lever_direction(str)</h4>
+	向き。クリエイティブインベントリから取り出したのはdown_east_westでした。
+	<h4>◎open_bit(bool)</h4>
+	<h3>■ minecraft:toripwire_fook</h3>
+	<h4>◎direction(int)</h4>
+	向き。データ値がもとになっていると思います。
+	<h4>◎attached_bit(bool)</h4>
+	<h4>◎powered_bit(bool)</h4>
+	<h3>■ minecraft:saylight_detector</h3>
+	<h4>◎redstone_signal(int)</h4>
+	<br><br><br><br>
+	これがすべてではないはずです。ここに書いてないもの、書いてあっても不十分だったりします。
+	<h3>値やプロパティ名を知る方法</h3>
+	知りたいブロックをインベントリに格納した状態でワールドを抜けてセーブをし、Androidにしか使えないアプリ「Blocktopograph」を使ってそのブロックのデータを見ると、下の画像のように載っていると思います。<br>
+	<div align="center">
+		<img src="images/blockstate_img_1.png" width="350" height="350"><br>
+	</div>
+	そしてこのブロックステートはScriptingAPIでも使うことができるので、ScriptingAPIを用いて抽出する方法もあります。(どちらかと言えばこっちのほうが確実です)
+	<div align="right">
+		<span class="reg">written by: Masec Rinca</span>
+	</div>
+</body>
+</html>

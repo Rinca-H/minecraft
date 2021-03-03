@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオン・ソースコード - 範囲破壊切り替え可能ツルハシ メイン機構</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" type="text/css" href="general.css">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body bgcolor="#FFF5D0">
+		<span class="desc">uploaded:2020/4/18　engine version:1.14.30.2</span>
+		<div align="left">
+			<h2>範囲破壊切り替え可能ツルハシ メイン機構</h2>
+		</div><br>
+		<h3>アニメーションコントローラ</h3>
+		<span>player.jsonと紐付けするのを忘れないでください。(３つすべて)</span><br><br>
+		<span class="pDat">Dat</span><span class="dir">../animation_controllers/soul_pickaxe.json</span>
+        <pre><code>{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.soul_pickaxe_mode": {
+      "states": {
+        "default": {
+          "transitions": [ { "mid_default_1": "(1.0)" } ],
+          "on_entry": [
+            "/scoreboard objectives add mode dummy mode",
+            "/scoreboard players set @p mode 0",
+            "/title @p actionbar デフォルト"
+          ]
+        },
+        "mid_default_1": {
+          "transitions": [
+            { "mode_change_2": "query.is_sneaking && query.get_equipped_item_name('main_hand') == 'soul_pickaxe'" }
+          ],
+          "on_exit": [
+            "/scoreboard objectives add mode dummy mode",
+            "/scoreboard players set @p mode 1",
+            "/title @p actionbar 範囲破壊",
+            "/playsound random.click @p ~ ~ ~ 100 1.8"
+          ]
+        },
+        "mode_change_2": {
+          "transitions": [
+            { "mid_default_2": "!query.is_sneaking" }
+          ]
+        },
+        "mid_default_2": {
+          "transitions": [
+            { "mode_change_1": "query.is_sneaking && query.get_equipped_item_name('main_hand') == 'soul_pickaxe'" }
+          ],
+          "on_exit": [
+            "/scoreboard objectives add mode dummy mode",
+            "/scoreboard players set @p mode 0",
+            "/title @p actionbar デフォルト",
+            "/playsound random.click @p ~ ~ ~ 100 1.8"
+          ]
+        },
+        "mode_change_1": {
+          "transitions": [
+            { "mid_default_1": "!query.is_sneaking && query.get_equipped_item_name('main_hand') == 'soul_pickaxe'" }
+          ]
+        }
+      }
+    },
+    "controller.animation.soul_pickaxe_aptitude": {//カスタムアイテムのツルハシでやための適正を持たせる機構です。必要がなければ省いてください
+      "states": {
+        "default": {
+          "transitions": [ 
+            { "true": "variable.attack_time && query.get_equipped_item_name('main_hand') == 'soul_pickaxe'" },
+            { "false": "variable.attack_time && !query.get_equipped_item_name('main_hand') == 'soul_pickaxe'" } 
+          ]
+        },
+        "true": {
+          "transitions": [ { "default": "(1.0)" } ],
+          "on_entry": [
+            "/fill ~-6 ~-6 ~-6 ~6 ~6 ~6 a1_stone 0 replace stone 0",
+            "/fill ~-6 ~-6 ~-6 ~6 ~6 ~6 a1_cobblestone 0 replace cobblestone 0",
+            "/fill ~-6 ~-6 ~-6 ~6 ~6 ~6 a1_coal_ore 0 replace coal_ore 0"
+          ]
+        },
+        "false": {
+          "transitions": [ { "default": "(1.0)" } ],
+          "on_entry": [
+            "/fill ~-6 ~-6 ~-6 ~6 ~6 ~6 stone 0 replace masec01:a1_stone 0",
+            "/fill ~-6 ~-6 ~-6 ~6 ~6 ~6 cobblestone 0 replace masec01:a1_cobblestone 0",
+            "/fill ~-6 ~-6 ~-6 ~6 ~6 ~6 coal_ore 0 replace masec01:a1_coal_ore 0"
+          ]
+        }
+      }
+    },
+    "controller.animation.soul_pickaxe_range": {
+      "states": {
+        "default": {
+          "transitions": [ { "mid": "query.get_equipped_item_name('main_hand') == 'soul_pickaxe'" } ],
+          "on_entry": [
+            "/execute @p[scores={mode=1}] ~ ~ ~ function rangemine_x",
+            "/execute @p[scores={mode=1}] ~ ~ ~ function rangemine_z",
+            "/tag @e[name=丸石] add executed"
+          ]
+        },
+        "mid": {
+          "transitions": [ { "default": "query.get_equipped_item_name('main_hand') == 'soul_pickaxe'" } ],
+          "on_entry": [
+            "/execute @p[scores={mode=1}] ~ ~ ~ function rangemine_x",
+            "/execute @p[scores={mode=1}] ~ ~ ~ function rangemine_z",
+            "/tag @e[name=丸石] add executed"
+          ]
+        }
+      }
+    }
+  }
+}</code></pre>
+        <br>
+        <br>
+        <h3>ファンクション</h3>
+        <span>rangemine_z.mcfuntionも同様なので省略します。</span><br><br>
+        <span class="pDat">Dat</span><span class="dir">../functions/rangemine_x.mcfunction</span>
+        <pre><code class="c">execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~1 ~-1 a1_stone 0 fill ~ ~1 ~-1 ~ ~1 ~-1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~1 ~ a1_stone 0 fill ~ ~1 ~ ~ ~1 ~ air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~1 ~1 a1_stone 0 fill ~ ~1 ~1 ~ ~1 ~1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~ ~-1 a1_stone 0 fill ~ ~ ~-1 ~ ~ ~-1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~ ~1 a1_stone 0 fill ~ ~ ~1 ~ ~ ~1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~-1 ~-1 a1_stone 0 fill ~ ~-1 ~-1 ~ ~-1 ~-1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~-1 ~ a1_stone 0 fill ~ ~-1 ~ ~ ~-1 ~ air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~-1 ~1 a1_stone 0 fill ~ ~-1 ~1 ~ ~-1 ~1 air 0 destroy
+
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~1 ~-1 a1_cobblestone 0 fill ~ ~1 ~-1 ~ ~1 ~-1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~1 ~ a1_cobblestone 0 fill ~ ~1 ~ ~ ~1 ~ air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~1 ~1 a1_cobblestone 0 fill ~ ~1 ~1 ~ ~1 ~1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~ ~-1 a1_cobblestone 0 fill ~ ~ ~-1 ~ ~ ~-1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~ ~1 a1_cobblestone 0 fill ~ ~ ~1 ~ ~ ~1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~-1 ~-1 a1_cobblestone 0 fill ~ ~-1 ~-1 ~ ~-1 ~-1 air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~-1 ~ a1_cobblestone 0 fill ~ ~-1 ~ ~ ~-1 ~ air 0 destroy
+execute @e[name=丸石,tag=!executed,x=~-6,y=~1,z=~,dx=13,dy=0,dz=0] ~ ~ ~ detect ~ ~-1 ~1 a1_cobblestone 0 fill ~ ~-1 ~1 ~ ~-1 ~1 air 0 destroy</code></pre>
+        <div align="right"><span class="reg">constructed by: Masec Rinca</span></div>
+	</body>
+</html>

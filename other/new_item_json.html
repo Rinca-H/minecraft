@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオン・ソースコード - アイテムの新しいフォーマット</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" type="text/css" href="general.css">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body bgcolor="#FFF5D0">
+		<div><span class="desc">uploaded:2020/12/23　engine version:1.16.200</span></div>
+		<div align="left">
+			<h2>アイテムの新しいフォーマット</h2>
+		</div>
+		<h3>新しいjsonの構文(書き方)</h3>
+		<span>
+		　あくまで書き方(構造)を示したものになります。そのままjsonとして使うことはできず、そもそも値が不定な部分を含むので動作しません。<br>
+		　基本的に、値はデフォルト値を記載します。
+		<div style="background: #ddd; padding: 10px;　margin: 10px;">
+		■記号の見方<br>
+		・<font color="blue">NameSpace</font>：任意のネームスペース/プリフィックス。原則「minecraft」は使用できない。<br>
+		・<font color="blue">Opt</font>：任意の文字列。基本はアルファベット。<br>
+		・<font color="blue">LangKey</font>：langファイルで定義したキー。<br>
+		・<font color="blue">TerrainName</font>：item_texture.jsonで定義したTerrainキー/TerrainID。<br>
+		・<font color="blue">EventName</font>：イベントキー/イベント名。<br>
+		・「<font color="blue">"EventFunction": {}</font>」：add_mob_effectやdamageなどの任意のイベントファンクション。値が{}とは限らない。
+		</div>
+		</span><br><br>
+		<span class="pDat">Dat</span><span class="dir">../items/custom_item.json</span>
+        <pre><code class="json">{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "NameSpace:Opt",
+      "category": "Nature"
+    },
+    "components": {
+      "minecraft:allow_off_hand": false,
+      "minecraft:armor": {
+        "protection": 4,
+        "texture_type": "leather"
+      },
+      "minecraft:block_placer": {
+        "block": "minecraft:grass",
+        "use_block_description": true,
+        "use_on": [ "minecraft:grass" ]
+      },
+      "minecraft:can_destroy_in_creative": true,
+      "minecraft:cooldown": {
+        "category": "ender_pearl",
+        "duration": 1
+      },
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.nature"
+      },
+      "minecraft:damage": 1,
+      "minecraft:digger": {
+        "use_efficiency": true,
+        "destroy_speeds": [
+          {
+            "block": { "tags": "query.any_tag('stone', 'metal', ...)" },
+            "speed": 6
+          },
+          {
+            "block": "minecraft:grass",
+            "speed": 6
+          },
+          ...
+        ],
+        "on_dig": {
+          "event": "EventName",
+          "target": "self"
+        }
+      },
+      "minecraft:display_name": { "value": "LangKey" },
+      /*または
+       "minecraft:display_name": { "value": "Opt" },
+      */
+      "minecraft:durability": {
+        "max_durability": 100,
+        "damage_chance": { "min": 5, "max": 10 }
+      },
+      "minecraft:dye_powder": { "color": 4 },
+      "minecraft:enchantable": {
+        "slot": "bow",
+        "value": 10
+      },
+      "minecraft:entity_placer": {
+        "entity": "minecraft:zombie",
+        "use_on": [ "minecraft:grass", ... ],
+        "dispense_on": [ "minecraft:stone", ... ]
+      },
+      "minecraft:explodable": true,
+      "minecraft:fertilizer": {
+        "type": "bonemeal"
+      },
+      "minecraft:foil": false,
+      "minecraft:food": {
+        "on_consume": {
+          "event": "EventName",
+          "target": "holder"
+        },
+        "nurtition": 3,
+        "can_always_eat": true,
+        "saturation_modifier": "normal",
+        "using_converts_to": "minecraft:apple"
+      },
+      "minecraft:fuel": {
+        "duration": 20
+      },
+      "minecraft:hand_equipped": false,
+      "minecraft:icon": {
+        "frame": 0,
+        "legacy_id": 0,
+        "texture": "TerrainName"
+      },
+      "minecraft:ignores_permission": false,
+      "minecraft:knockback_resistance": { "protection": 0.4 },
+      "minecraft:liquid_clipped": false,
+      "minecraft:max_stack_size": 64,
+      "minecraft:mining_speed": 1,
+      "minecraft:on_use": {
+        "on_use": {
+          "event": "EventName",
+          "target": "self"
+        }
+      },
+      "minecraft:on_use_on": {
+        "on_use_on": {
+          "event": "EventName",
+          "target": "self"
+        }
+      },
+      "minecraft:record": {
+        "sound_event": "cat",
+        "duration": 120,
+        "comparator_signal": 8
+      },
+      "minecraft:repairable": {
+        "repair_items": [
+          {
+            "items":[ "minecraft:iron_ingot", ... ],
+            "repair_amount": 10,
+            "on_repaired": {
+              "event": "EventName",
+              "target": "holder"
+            }
+          },
+          ...
+        ]
+      },
+      "minecraft:projectile": {
+        "projectile_entity": "minecraft:arrow",
+        "minimum_critical_power": 0.5
+      },
+      "minecraft:shooter": {
+        "max_draw_duration": 1,
+        "charge_on_draw": false,
+        "launch_power_scale": 1.0,
+        "max_launch_power": 1.0,
+        "scale_power_by_draw_duration": true,
+        "ammunition": [
+          {
+            "item": "minecraft:arrow",
+            "use_offhand": true,
+            "search_inventory": true,
+            "use_in_creative": true
+          }
+        ]
+      },
+      "minecraft:should_despawn": true,
+      "minecraft:stacked_by_data": true,
+      "minecraft:throwable": {
+        "do_swing_animation": true,
+        "launch_power_scale": 1.0,
+        "max_draw_duration": 2,
+        "min_draw_duration": 0.0,
+        "max_launch_power": 1.0,
+        "scale_power_by_draw_duration": true
+      },
+      "minecraft:use_duration": 32,
+      "minecraft:weapon": {
+        "on_hurt_entity": {
+          "event": "EventName",
+          "target": "self"
+        },
+        "on_hit_block": {
+          "event": "EventName",
+          "target": "self"
+        },
+        "on_not_hurt_entity": {
+          "event": "EventName",
+          "target": "self"
+        }
+      },
+      "minecraft:wearable": {
+        "dispensable": true,
+        "slot": "slot.armor.feet"
+      },
+      "tag:Opt": {}
+    },
+    
+    "events": {
+      "EventName": {
+        "add_mob_effect": {
+          "effect": "poison",
+          "target": "holder",
+          "duration": 8,
+          "amplifier": 3
+        },
+        "damage": {
+          "type": "magic",
+          "amount": 4
+        },
+        "decrement_stack": {},
+        "run_command": {
+          "command": [ "say hi" ],
+          "target": "other"
+        },
+        "randomize": [
+          {
+            "weight": 1,
+            "EventFunction": {}
+          }
+        ],
+        "remove_mob_effect": {
+          "effect": "poison",
+          "target": "holder"
+        },
+        "sequence": [
+          {
+            "EventFunction": {}
+          },
+          ...
+        ],
+        "shoot": {
+          "projectile": "minecraft:snowball",
+          "launch_power": 5,
+          "angle_offset": 20
+        },
+        "swing": {},
+        "teleport": {
+          "target": "holder",
+          "max_range": [ 8, 8, 8 ]
+        },
+        "transform_item": {
+          "transform": "minecraft:apple"
+        }
+      }
+    }
+  }
+}</code></pre>
+        <div align="right"><span class="edd">Special</span></div>
+        <br>
+        <div align="right"><span class="reg">constructed by: Masec Rinca</span></div>
+	</body>
+</html>

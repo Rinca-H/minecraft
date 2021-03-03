@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオン・ソースコード - HPバーをパーティクルだけでつくる</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" type="text/css" href="general.css">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body bgcolor="#FFF5D0">
+		<span class="desc">uploaded:2020/11/01　engine version:1.16.40</span>
+		<div align="left">
+			<h2>HPバーをパーティクルだけでつくる</h2>
+		</div><br>
+		<div>
+			　アニメーションコントローラやエンティティのクライアントjsonと紐付けするのは各自でやってください。<br>
+			　つけたいエンティティのjsonを編集して紐付けるので、すべてのエンティティにつけたい場合は手動ですべてのエンティティのjsonを編集する必要があります。<br>
+			　コマンドでこのパーティクルを出そうとすると何も出ません。追加できているかどうかはパーティクル単体では確かめることはできません。<br>
+		</div><br><br>
+		<span class="pRes">Res</span><span class="dir">../particles/hp_bar.json</span>
+        <pre><code>{
+  "format_version": "1.10.0",
+  "particle_effect": {
+    "description": {
+      "identifier": "ex:hp_bar",
+      "basic_render_parameters": {
+        "material": "particles_alpha",
+        "texture": "textures/particle/hp_bar"
+      }
+    },
+    "components": {
+     "minecraft:emitter_local_space": {
+        "position": true,
+        "rotation": true
+      },
+      "minecraft:particle_motion_parametric": { //エンティティの足元からの高さ = 2.25
+        "relative_position": [ 0.0, 2.25, 0.0 ]
+      },
+      "minecraft:emitter_rate_steady": {
+        "spawn_rate": "Math.random(15, 25)",
+        "max_particles": 50
+      },
+      "minecraft:emitter_lifetime_looping": {
+       "active_time": 10,
+       "sleep_time": 0
+      },
+      "minecraft:emitter_lifetime_expression": {
+        "activation_expression": 1,
+        "expiration_expression": 0
+      },
+      "minecraft:emitter_shape_custom": {
+        "offset": [ 0, 0.1, 0 ],
+        "direction": [ 1.0, 0.0, 0.0 ]
+      },
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": 0.5
+      },
+      "minecraft:particle_appearance_billboard": {
+        "size": [ 0.25 , 0.02 ], //拡大率 [ 横, 縦 ]
+        "facing_camera_mode": "lookat_xyz",
+        "uv": {
+          "texture_width": 64,
+          "texture_height": 64,
+          "uv": [ "(1.0 - query.health / query.max_health) *32", "(query.health == 0) ? 34 : 30" ], //いちばん重要なところ
+          "uv_size": [ 32, 4 ]
+        }
+      },
+      "minecraft:particle_appearance_tinting": { //次に重要なところ
+        "color": [ 
+          "math.min(2- 2*query.health/query.max_health, 1)",
+          "math.min(2*query.health/query.max_health, 1)",
+          0.0,
+          1.0
+        ]
+      }
+    }
+  }
+}</code></pre><br>
+		<div>
+			「いちばん重要なところ」がHPを検知してテクスチャに反映させている部分です<br>
+			「次に重要なところ」は白黒のテクスチャに色をつけるために必要なコンポーネントです。逆に、後からこうして色をつけるためにテクスチャは白黒になっています。
+			<h3>■色の遷移方式の変更</h3>
+			　上記のjsonの状態では、HP最大からゼロにかけて緑から黄や橙を通じてだんだんと赤になっていく遷移方式です。<br>
+			　そこで、ある値を境にパッと黄、赤へと変わる遷移方式にする場合のコードを紹介します。<br>
+			　上記の「次に重要なところ」が指すコンポーネント内の"color"要素を次のように変更します。<br>
+		</div>
+		<pre><code>"color": [ 
+  "(query.health / query.max_health < 0.25) ? 1.0 : 0.0",
+  "(query.health / query.max_health < 0.125) ? 0.0 : 1.0",
+  0.0,
+  1.0
+]</code></pre><br>
+        <div>
+        	　この場合、HPが全体の0.25(=1/4)より小さくなった場合に黄色く、HPが全体の0.125(=1/8)より小さくなった場合に赤くなるようになっています。その二つの値についてはお好みで変更するといいでしょう。
+		</div><br><br>
+		<span class="pRes">Res</span><span class="dir">../textures/particle/hp_bar.png</span><br>
+		<img src="images/hp_bar.png" width=240px height=240px>
+		<div>
+			※テクスチャ本体を長押しや右クリックするとダウンロードできると思います<br>
+			※ぼやけて見えますが、ダウンロードしたものはぼやけません(そのまま使えます)<br><br>
+			
+			　意味があって白黒にしてあります。色を塗ると色が混ざります。<br>
+			　色を変えたい場合は上記のパーティクル定義jsonにある色を司る部分にて指定してください。
+			<h3>■最も重要な部分の解説</h3>
+			　"minecraft:particle_appearance_billboard"の"uv"ではテクスチャの切り取る部分(の基準)を指定し、"uv_size"でその切り取る大きさを指定しますが、今回は元のテクスチャテクスチャファイルの横が64なのに対して半分の32しか切り取っていません。<br>
+			　下の図で赤い枠線がその「切り取る部分」です。HPに応じて切り取る部分を横に動かしていけばたしかにHPが減っていくように映すことができますね。"逆紙芝居"といったところでしょうか。<br>
+			　考えたひとは頭いいと思いました。<br>
+		</div><br>
+		<div align="center"><img src="images/hp_bar_explanation.png" width=70% height=70%></div>
+		<div>
+			<h3>最後に</h3>
+			　もっと自分なりにカスタマイズしたい場合は研究しましょう。HP最大からゼロにかけて緑から黄や橙を通じてだんだんと赤になっていく色の遷移方式ならばできませんが、HPが減って暗くなった部分を完全に黒く(無彩色に)することもできます。はたまた、枠をつけるとなるとより難しくなります。<br>
+			　わたしから伝えられることは以上です。
+        <div align="right"><span class="reg">constructed by: Rinca Hayamine</span></div>
+	</body>
+</html>

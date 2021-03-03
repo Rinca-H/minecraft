@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオン・ソースコード - ブロックの新しいフォーマット</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" type="text/css" href="general.css">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body bgcolor="#FFF5D0">
+		<div><span class="desc">uploaded:2020/12/23　engine version:1.16.200</span></div>
+		<div align="left">
+			<h2>ブロックの新しいフォーマット</h2>
+		</div>
+		<h3>新しいjsonの構文(書き方)</h3>
+		<span>
+		　あくまで書き方(構造)を示したものになります。そのままjsonとして使うことはできず、そもそも値が不定な部分を含むので動作しません。<br>
+		　基本的に、値はデフォルト値を記載します。
+		<div style="background: #ddd; padding: 10px;　margin: 10px;">
+		■記号の見方<br>
+		・<font color="blue">NameSpace</font>：任意のネームスペース/プリフィックス。原則「minecraft」は使用できない。<br>
+		・<font color="blue">Opt</font>：任意の文字列。基本はアルファベット。<br>
+		・「<font color="blue">"Component": {}</font>」：任意のコンポーネント。値が{}とは限らない。<br>
+		・<font color="blue">LangKey</font>：langファイルで定義したキー。<br>
+		・<font color="blue">GeoName</font>：ジオメトリ名/ジオメトリid。<br>
+		・<font color="blue">TerrainName</font>：terrain_texture.jsonで定義したTerrainキー/TerrainID。<br>
+		・<font color="blue">EventName</font>：イベントキー/イベント名。<br>
+		・<font color="blue">LootTable</font>：ルートテーブルのファイルパス。<br>
+		・「<font color="blue">"EventFunction": {}</font>」：add_mob_effectやdamageなどの任意のイベントファンクション。値が{}とは限らない。
+		</div>
+		</span><br><br>
+		<span class="pDat">Dat</span><span class="dir">../blocks/custom_block.json</span>
+        <pre><code class="json">{
+  "format_version": "1.16.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "NameSpace:Opt",
+      "properties": {
+        "minecraft:direction": {},
+        "NameSpace:Opt": [ 1, 2, 3, 4, ... ]
+        /*または
+        "NameSpace:Opt": [ "Opt", "Opt", ... ]
+        */
+      }
+    },
+    
+    "permutations": [
+      {
+        "condition": "(1.0)",
+        "components": {
+          "Conponent": {},
+          ...
+        }
+      },
+      ...
+    ],
+    
+    "components": {
+      "minecraft:block_light_absorption": 0,
+      "minecraft:block_light_emission": 0.0,
+      "minecraft:breakonpush": false,
+      "minecraft:breathability": "solid",
+      "minecraft:crafting_table": {
+        "custom_description": "Opt",
+        "grid_size": 3,
+        "crafting_tags": [ "crafting_table", "Opt", ... ]
+	  },
+      "minecraft:destroy_time": 0.0,
+      "minecraft:display_name": "LangKey",
+      /*または
+      "minecraft:display_name": "Opt",
+      */
+      "minecraft:entity_collision": true,
+      /*または
+      "minecraft:entity_collision": {
+        "origin": [ -8.0, 0.0, -8.0 ],
+        "size": [ 16.0, 16.0, 16.0 ]
+      },
+      */
+      "minecraft:explosion_resistance": 0.0,
+      "minecraft:flammable": {
+        "burn_odds": 0,
+        "flame_odds": 0
+      },
+      "minecraft:friction": 0.1,
+      "minecraft:geometry": "GeoName",
+      "minecraft:immovable": false,
+      "minecraft:map_color": "#ffffff",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "TerrainName",
+          "material": "opaque"
+        }
+      },
+      "minecraft:onlypistonpush": false,
+      "minecraft:on_fall_on": {
+        "event": "EventName",
+        "target": "self",
+        "condition": "(1.0)",
+        "min_fall_distance": 5
+      },
+      "minecraft:on_interact": {
+        "event": "block_event",
+        "target": "self",
+        "condition": "(1.0)"
+      },
+      "minecraft:on_placed": {
+        "event": "EventName",
+        "target": "self",
+        "condition": "(1.0)"
+      },
+      "minecraft:on_player_placing": {
+        "event": "EventName",
+        "target": "self",
+        "condition": "(1.0)"
+      },
+      "minecraft:on_player_destroyed": {
+        "event": "EventName",
+        "target": "self",
+        "condition": "(1.0)"
+      },
+      "minecraft:on_step_off": {
+        "event": "EventName",
+        "target": "self",
+        "condition": "(1.0)"
+      },
+      "minecraft:on_step_on": {
+        "event": "EventName",
+        "target": "self",
+        "condition": "(1.0)"
+      },
+      "minecraft:pick_collision": true,
+      /*または
+      "minecraft:pick_collision": {
+        "origin": [ -8.0, 0.0, -8.0 ]
+        "size": [ 16.0, 16.0, 16.0 ]
+      },
+      */
+      "minecraft:placement_filter": {
+        "conditions": [
+          {
+            "allowed_faces": [ "all", ... ],
+            "block_filter": [ "minecraft:grass", ... ]
+          },
+          ...
+        ]
+      },
+      "minecraft:preventsjumping": false,
+      "minecraft:random_ticking": {
+        "on_tick": {
+          "condition": "(1.0)",
+          "event": "EventName",
+          "range": [ 10, 10 ]
+          "target": "self"
+        }
+      },
+      "minecraft:rotation": [ 0, 0, 0 ],
+      "minecraft:ticking": {
+        "looping": true,
+        "range": [ 0.0, 0.0 ],
+        "on_tick": {
+          "condition": "(1.0)",
+          "event": "EventName",
+          "target": "self"
+        }
+      },
+      "minecraft:unit_cube": {},
+      "minecraft:unwalkable": false,
+      "tag:Opt": {}
+    },
+    
+    "events": {
+      "EventName": {
+        "add_mob_effect": {
+          "amplifier": 0,
+          "duration": 0.0,
+          "effect": "poison",
+          "target": "self"
+        },
+        "damage": {
+          "amount": 0,
+          "target": "self",
+          "type": "magic"
+        },
+        "decrement_stack": {},
+        "die": { "target": "self" },
+        "play_effect": {
+          "effect": "minecraft:campfire_smoke",
+          "target": "self"
+        },
+        "play_sound": {
+          "sound": "mob.enderman.death",
+          "target": "self"
+        },
+        "remove_mob_effect": {
+          "effect": "poison",
+          "target": "other"
+        },
+        "run_command": {
+          "command": "summon pig"
+        },
+        /*または
+        "run_command": {
+          "command": [ "summon pig", ... ]
+        },
+        */
+        "set_block": "minecraft:grass",
+        "spawn_loot": { "table": "LootTable" },
+        "set_block_at_pos": {
+          "block_type": "minecraft:grass",
+          "block_offset": [ 0, 0, 0 ]
+        },
+        "set_block_property": { "NameSpace:Opt": "red" },
+        /*または
+        "set_block_property": { "NameSpace:Opt": 1 },
+        */
+        "trigger": {
+          "condition": "(1.0)",
+          "event": "EventName",
+          "target": "self"
+        },
+        "sequence": [
+          {
+            "EventFunction": {}
+          },
+          ...
+        ],
+        "randomize": [
+          {
+            "weight": 1,
+            "EventFunction": {}
+          },
+          ...
+        ]
+      },
+      ...
+    }
+  }
+}</code></pre>
+        <div align="right"><span class="edd">Special</span></div>
+        <br>
+        <div align="right"><span class="reg">constructed by: Masec Rinca</span></div>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオン・ソースコード - 最後の謎</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" type="text/css" href="general.css">
+		<meta name="viewport" content="width=device-width">
+	</head>
+	<body bgcolor="#FFF5D0">
+		<span class="desc">uploaded:2020/4/18　engine version:1.14.0.9</span>
+		<div align="left">
+			<h2>最後の謎</h2>
+		</div><br>
+		<span class="pRes">Res</span><span class="dir">../models/block/-.json</span>
+        <pre><code>{
+  "format_version": str,                      //Version of the block geometry being used. This is used to determine if backwards compatibility is needed
+  "materials": list,                          //List of materials used by this model
+  "parent": str,                              //Parent model of this model
+  "elements": {                               //List of elements that make up the geometry of this block
+    "material": str,                          //The material of this element if different from the block's
+    "name": str,                              //Name of the element
+    "parent": str,                            //Name of the parent element of this element. Pivot and box positions are made relative to the parent element's pivot
+    "pivot": [ float, float, float ],         //Position in model space of the pivot point of the element. This is used as the "center" position of the element, as well as the point around which to rotate
+    "rotation": [ float, float, float ],      //The rotation of this element about its pivot
+    "boxes": {                                //List of cubes that make up the geometry of this element
+      "material": str,                        //The material of this box if different from the element's
+      "origin": [ float, float, float ],      //The position of the center of the box relative to the geometry
+      "size": [ int, int, int ],              //Scale of the box in the x, y and z coordinates. A typical block is of scale 1, 1, 1
+      "faces": {                              //List of the 6 faces of the box. If specified, there MUST be 6 faces (front, back, left side, right side, top, bottom)
+        "material": str,                      //The material of this face if different from the box's
+        "rotation": dec,                      //UV Rotation of this face. Only acceptable values are 0, 90 and 270 degrees. This allows reusing a texture and just rotating it for different faces
+        "uv": [ float, float, float, float ]  //Texture coordinates of this face, given as min x, min y, max x, max y withg values between 0.0 and 1.0
+      }
+    }
+  }
+}</code></pre>
+        <div align="right"><span class="sch">Schema</span></div>
+        <div align="right"><span class="reg">constructed by: Masec Rinca</span></div>
+	</body>
+</html>
