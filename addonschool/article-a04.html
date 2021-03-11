@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>パックの作り方 - アドオン教習所</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <!-- <pre><code class="json">//コード</code></pre> -->
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" type="text/css" href="addon_school.css">
+		<link rel="shortcut icon" href="img/favicon.ico">
+	</head>
+	<body style="margin: 0px; background: #FFF5D0;">
+		<header class="header">
+			<a href="home.html"><img src="img/logo_black.png" style="display: inline-block; height: 3em;"></a>
+			<input type="checkbox" id="menu-btn-check">
+			<label for="menu-btn-check" class="menu-btn"><span></span></label>
+			<div class="menu-content">
+				<ul>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #595959; color: #fff;">
+							<h2>このサイトについて</h2>
+							<a href="home.html#whatslike">どんなサイト？</a>
+							<a href="home.html#profile">書いてるひとProfile</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #587EFF; color: #fff;">
+							<h2>アドオン全般</h2>
+							<a href="article1.html">アドオンって何？</a>
+							<a href="article2.html">アドオン初心者へ</a>
+							<a href="article3.html">知っておくべき用語集</a>
+							<a href="article4.html">パックの作り方(必須！)</a>
+							<a href="#">JSONとは？</a>
+							<a href="#">Molangについて</a>
+							<a href="#">知っておくと便利な小技</a>
+						</div>
+					</li>
+					<li><div style="margin: 0.5em; padding: 0.5em; background: #31AF37; color: #fff;">
+							<h2>リソース</h2>
+							<a href="#">ブロックのテクスチャ</a>
+							<a href="#">アイテムのテクスチャ</a>
+							<a href="#">エンティティのテクスチャ</a>
+							<a href="#">エンティティのモデリング</a>
+							<a href="#">エンティティのアニメーション</a>
+							<a href="#">サウンド(効果音)</a>
+							<a href="#">テキスト</a>
+							<a href="#">オリジナルのパーティクル</a>
+							<a href="#">マテリアル</a>
+							<a href="#">UI(上級者向け)</a>
+							<a href="#">シェーダ(上級者向け/制限あり)</a>
+							<a href="#">スキンパック</a>
+							<a href="#">RTX用のテクスチャ</a>
+							<a href="#">雑多</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #FF6169; color: #fff;">
+							<h2>ビヘイビア</h2>
+							<a href="#">オリジナルのブロック</a>
+							<a href="#">オリジナルのアイテム</a>
+							<a href="#">エンティティを改造</a>
+							<a href="#">オリジナルのエンティティ</a>
+							<a href="#">バイオーム</a>
+							<a href="#">フィーチャー(建造物・構造物)</a>
+							<a href="#">アニメーションコントローラ</a>
+							<a href="#">ScriptingAPI(上級者向け)</a>
+							<a href="#">ファンクション</a>
+							<a href="#">ルートテーブル</a>
+							<a href="#">交易テーブル</a>
+							<a href="#">レシピ</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<div><span class="desc">LatestUpdate : 2021/01/19</span></div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="margin: 1.5em;">
+		<h1>パックの作り方</h1><br>
+		<details><summary style="color: transparent;"><span><b>＋</b> もくじ</span></summary><br>
+		<div class="mini_idx">
+		<span class="mokuzi">もくじ</span>
+		<h4>■ 基礎行程１</h4>
+		　①入れ物を用意する<br>
+		　②パックのアイコンを用意する<br>
+		　③マニフェストを用意する<br>
+		　④マニフェストを編集する<br>
+		　⑤圧縮する<br>
+		<h4>■ 基礎行程２</h4>
+		　①古いパックを消す<br>
+		　②中身に変更を加える<br>
+		　③圧縮する<br>
+		<h4>■ アドオンパックの作り方</h4>
+		<h4>■ パック編集の小技</h4>
+		<h4>■ 依存関係</h4>
+		<h4>■ サブパックの作り方</h4>
+		<h4>■ ScriptingAPIを使用する際の注意</h4>
+		</div></details><br>
+		<p>
+		　パックが作れないとリソースパック、またはビヘイビアパックとしてそもそも導入できないので必ず知ってください。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">基礎行程１</span><br></div>
+		<p>
+		　まずは<ruby><rb>空</rb><rp>(</rp><rt>から</rt><rp>)</rp></ruby>のパックを作ってみましょう。
+		</p>
+		<h2>①入れ物を用意する</h2>
+		<p>
+		　まずは<b>アドオン専用の新規フォルダを作りましょう</b>。フォルダの名前は自由です。今回は最低限必要なもの以外何も入れませんが、アドオン作りは基本そのフォルダ内で行われることになります。たくさん作るときはビヘイビアパックやリソースパックなどのパック一つごとに一つフォルダを増やす感じになります。
+		</p>
+		<div align=center><img src="img/pic4-1.png" width=70%></div>
+		<h2>②パックのアイコンを用意する</h2>
+		<p>
+		　パックのアイコンとは、ゲーム内の設定で<b>アドオン選択画面に表示されるアイコン</b>です。サイズの指定は特にないと思います。アイコンの画像を用意したら、<b>ファイルの名前は必ず「pack_icon」にしてください</b>。拡張子は「.png」で統一しましょう。もし用意した画像の拡張子が「.jpg」や「.jpeg」で「.png」に変えようとしても勝手に書き換えてはいけません。変換するか、PNG形式で保存し直してください。変換する場合は「jpg png 変換」などと検索すればオンラインコンバータが簡単に見つかると思います。<br>
+		　用意したものは、はじめに作ったフォルダに置いてください。<br>
+		　面倒ならテンプレートに入っている「pack_icon.png」をそのまま使用しても構いません。
+		<div align=center><img src="img/pic4-2.png" width=40%>
+		<img src="img/pic4-3.png" width=40%></div>
+		</p>
+		<h2>③マニフェストを用意する</h2>
+		<p>
+		　マニフェストとは、パックをインポートしたときにこれらのファイル群が<b>アドオンを構成するものだとゲーム本体に認識させるためのファイル</b>です。<br>
+		　イチから自分で書くのは面倒なので、<b>テンプレートに同封されている「manifest.json」のコピーから必要な部分だけ書き換えていきます</b>。これをコピーして、はじめに作ったフォルダに貼り付けます。今回は中身がないのでビヘイビアのほうからコピーしてもリソースのほうからコピーしても構いません。大差ないですができるだけ<b>作りたいパックのほうからコピーするといいでしょう</b>。
+		</p>
+		<div align=center><img src="img/pic4-4.png" width=70%></div>
+		<h2>④マニフェストを編集する</h2>
+		<p>
+		　マニフェストをテキストエディタで開きましょう。「.json」が名前にある「JSONファイル」は既定で(常時)そのテキストファイルで開くように設定するといいでしょう。
+		</p>
+		<pre><code class="json">{
+    "format_version": 2,
+    "header": {
+        "description": "Example vanilla behavior pack",
+        "name": "Vanilla Behavior Pack",
+        "uuid": "ee649bcf-256c-4013-9068-6a802b89d756",
+        "version": [ 0, 0, 1 ],
+        "min_engine_version": [ 1, 16, 210 ]
+    },
+    "modules": [
+        {
+            "description": "Example vanilla behavior pack",
+            "type": "data",
+            "uuid": "fa6e90c8-c925-460f-8155-c8a60b753caa",
+            "version": [0, 0, 1]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "66c6e9a8-3093-462a-9c36-dbb052165822",
+            "version": [0, 0, 1]
+        }
+    ]
+}</code></pre>
+		<p>
+		　これはビヘイビアのほうから持ってきました。リソースの場合、少し短いと思います。上から順に説明していきます。気にしなくていいものは飛ばしますが、<b>何かで意味を知らない限りは変更しないでください。</b><br>
+		</p>
+		<h4>○description</h4>
+		<p>　パックの説明文。</p>
+		<h4>○name</h4>
+		<p>　パックの名前。</p>
+		<h4>○uuid</h4>
+		<p>
+		　パックのid。これは<b>パックによって変える必要があり、すでに持っているパックとidがカブっているものをインポートしようとするとエラーになってしまいます</b>。<br>
+		　そこで、そのidは「<a href="https://www.uuidgenerator.net/">Online UUID Generator</a>」で発行してもらいます。発行してもらうには、このサイトに飛んですぐに表示されているUUIDの右側にある<span style="background: #9B9B9B; border-radius: 3px; color: #fff; padding: 0.5em">Copy</span>ボタンを押せばクリップボードにコピーされるので、あとはもとあったUUIDと入れ換えるだけです。あと、<b>ページを更新すれば新しいUUIDが発行されます</b>。<br>
+		　まれに、自分がすでに持っているパックとたまたまUUIDがカブってエラーになることがあるので、導入して一度「重複したパックを検出」と出たらUUIDを変更してみてください。(その際パックが上書きされたり消えたりすることはないです)
+		</p>
+		<h4>○version</h4>
+		<p>　パックのバージョン。自分で決められます。</p>
+		<h4>○min_engine_version</h4>
+		<p>　このパックが使える<b>マインクラフト本体の最低バージョン</b>。いまこのパックを作っているときのバージョン、つまり自分が<b>このパックの動作確認した最低バージョン</b>でいいと思います。</p>
+		<h4>○type</h4>
+		<p>　パックのタイプ。ビヘイビアなら「"data"」、リソースなら「"resources"」です。先の分野の話になるので聞き流してもいいですが、ScriptingAPIを使用する際のビヘイビアは「"client_data"」となります。<b>テンプレートからコピーしてくる段階でビヘイビアを作る場合はビヘイビアから、リソースを作る場合はリソースからコピーしてくることによってここを書き換える必要がなくなります。</b></p>
+		<p>　二度目のdescriptionとversionも同じです。ただし<b>二度目のuuidはまた新しいUUIDに書き換えてください</b>。よって<b>一つのマニフェストを作るのに新しいUUIDを<ruby><rb>最低で</rb><rp>(</rp><rt>・・・</rt><rp>)</rp></ruby>二回発行する必要があります</b>。
+		<p>　最後に少し難しいことをします。下のほうにある<b>「dependancies」のカタマリはややこしいので消します</b>(リソースのほうにはもともとありません)。これは任意であってもなくてもいいので詳しくは「依存関係」の章で説明するのでそちらを読んでください。</p>
+		<div align="center"><img src="img/pic4-5.png" width=70%></div>
+		<h4>○マニフェストは以上</h4>
+		<p>
+		　編集例をあげます。UUID、パックの名前・説明は各自で異なるはずです。<br>
+		・UUIDは<ruby><rb>二つ</rb><rp>(</rp><rt>・・</rt><rp>)</rp></ruby>別のものに書き換えましたか？<br>
+		・「"」を消したりしていませんか？<br>
+		・「,」を余分に消していませんか？<br>
+		・カッコの組は正しい組ですか？<br>
+		<pre><code class="json">{
+    "format_version": 2,
+    "header": {
+        "description": "これは空(から)のパックです",
+        "name": "マイテストパック",
+        "uuid": "ef805b52-e547-466f-a2b8-17d045d4726f",
+        "version": [ 0, 0, 1 ],
+        "min_engine_version": [ 1, 16, 210 ]
+    },
+    "modules": [
+        {
+            "description": "これは空(から)のパックです",
+            "type": "data",
+            "uuid": "f3d885d5-501f-4ba6-848a-0fbe62f134b5",
+            "version": [0, 0, 1]
+        }
+    ]
+}</code></pre>
+		<h2>⑤圧縮する</h2>
+		<p>　現在のファイル構成は以下のようになっているでしょうか？</p>
+		<div align=center>
+		<div style="margin: 0px 2em; padding: 1em; background: #CCCCFF; display: inline-block;">
+		(はじめのフォルダ)┳pack_icon.png<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┗manifest.json<br>
+		</div></div><br>
+		<div align=center><img src="img/pic4-6.png" width=40%>
+		<img src="img/pic4-7.png" width=40% style="vertical-align: top;"></div>
+		<p>
+		　右の二つのファイルを複数選択で<b>すべて選択し、.zipファイルに圧縮します</b>。圧縮してできたファイルの拡張子を<b>「.zip」から「.mcpack」に書き換えます</b>。これは特に変換などをせずに書き換え、「ファイルが使えなくなる可能性があります」と言われても気にする必要はありません。<br>
+		　あと、圧縮した際に、圧縮する前のファイルは残ると思うんですが、近いうちにこのパックに変更を加える場合それらを消す必要はありません。今後パックの中身を更新するときに圧縮したものをわざわざ展開せずに作業が始められます。
+		</p>
+		<div align=center><img src="img/pic4-8.png" width=70%></div>
+		<p>　<b>これで中身がない「ビヘイビアパック」または「リソースパック」が完成しました！</b></p>
+		<p>
+		　あとは完成したファイルをダブルクリックやタップで開きます。その際、開くプログラムを選ぶことになると思うので、マインクラフトで常時開くように選択します。<br>
+		　正しくインポートできたら完了です！
+		</p>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">基礎行程２</span><br></div>
+		<p>　今度は中身を入れることを想定します。「基礎行程１」で作ったものから変更を加えていきます。言い換えると、パックのアップデートのやり方ですね。</p>
+		<h2>①古いパックを消す</h2>
+		<p>
+		　一度ゲーム本体にインポートしたパックは消しましょう(<font color="red">ゲーム内にあるもののみですよ！　元のファイルを消せばもちろんただの作り直しです！</font>)。たとえパックのアップデートであろうとUUIDが同じなのでインポートしてくれません。かといってアップデートのたびに新しいUUIDを発行してインポートすると当然別のパックだと認識されるのでどんどんたまっていきます。
+		</p>
+		<div align=center><img src="img/pic4-9.png" width=70%><br>「(タイトル画面)→設定→ストレージ」から削除します。<br>消すのは.mcpackなどの「本体」ではありませんよ？</div>
+		<h2>②中身に変更を加える</h2>
+		<p>
+		　どのフォルダにどのファイルを入れるかはそれぞれの分野で説明します。ちなみにすべての分野で追加や変更をする場合、このようなフォルダ構成になります。
+		</p>
+		<div align=center>
+		<div style="margin: 0px 2em; padding: 1em; background: #CCCCFF; display: inline-block; margin: 1em; vertical-align: top;" align="left">
+		(ビヘイビアパック)┳animation_controllers<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣animations<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣biomes<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣blocks<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣entities<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣feature_rules<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣features<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣functions<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣items<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣loot_tables<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣recipes<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣scripts<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣spawn_rules<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣structures<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣trading<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┣manifest.json<br>
+		&nbsp;　　　　　　　　&nbsp;&nbsp;┗pack_icon.png<br>
+		</div>
+		<div style="margin: 0px 2em; padding: 1em; background: #CCCCFF; display: inline-block; margin: 1em;" align="left">
+		(リソースパック)┳animation_controllers<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣animations<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣attachables<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣entity<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣experimental_ui<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣fogs<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣materials<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣models<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣particles<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣render_controllers<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣shaders<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣sounds<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣texts<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣textures<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣ui<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣blocks.json<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣manifest.json<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣pack_icon.json<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┗sounds.json<br>
+		</div></div>
+		<h2>③圧縮する</h2>
+		<p>　あとは「基礎行程１」と同様です。</p>
+		<hr>
+		<p>　ここまでが基本です。次の章からは必須ではないので任意で読んでみてください。</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">アドオンパックの作り方</span><br></div>
+		<p>
+		　ビヘイビアパックでオリジナルのコンテンツを追加する際に、リソースパックも同時に必要になってくることがほとんどです。ビヘイビアパックとリソースパックをそれぞれ作って二つのパックをインポートする必要がありますが、二つのパックをインポートするためには、<b>一つのパックをインポートしてからもう一つのパックをインポートしなくてはならない</b>ので面倒です。そこで、<b>二つ以上のパックを同時にインポートする方法</b>があります。<br>
+		　<b>同時にインポートしたい.mcpackファイルを複数選択ですべて選択し、さらに圧縮します</b>。できた.zipファイルの<b>「.zip」を「.mcaddon」に書き換えます</b>。このファイルも.mcpackファイルと同様に開くとマインクラフトが起動してインポートが始まります。インポートは一つずつ行われ、一つのインポートが終わると自動で次のパックのインポートが始まります。
+		</p>
+		<div style="position: relative; margin: 1em; text-align: center;">
+			<hr>
+			<span style="font-size: 32px; position:absolute; top: -16px; right: 0%; left: 0%;">
+			<span style="background: #FFF5D0;">
+			<img src="img/caution.png" width=24px>&nbsp;以下執筆中&nbsp;<img src="img/caution.png" width=24px>
+			</span>
+			</span>
+		</div>
+		<p>
+		　
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">依存関係</span><br></div>
+		<p>　「依存関係」を利用して、ゲーム内のアドオン設定画面でビヘイビアパックを適用したときに自動でセットのリソースパックを適用してくれるようにすることができます。</p>
+		</div>
+		<div style="text-align: right; margin: 0.5em;"><span style="font-size: 70%;">© Rinca Hayamine 2021</span></div>
+	</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオン初心者へ - アドオン教習所</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <!-- <pre><code class="json">//コード</code></pre> -->
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" type="text/css" href="addon_school.css">
+		<link rel="shortcut icon" href="img/favicon.ico">
+	</head>
+	<body style="margin: 0px; background: #FFF5D0;">
+		<header class="header">
+			<a href="home.html"><img src="img/logo_black.png" style="display: inline-block; height: 3em;"></a>
+			<input type="checkbox" id="menu-btn-check">
+			<label for="menu-btn-check" class="menu-btn"><span></span></label>
+			<div class="menu-content">
+				<ul>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #595959; color: #fff;">
+							<h2>このサイトについて</h2>
+							<a href="home.html#whatslike">どんなサイト？</a>
+							<a href="home.html#profile">書いてるひとProfile</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #587EFF; color: #fff;">
+							<h2>アドオン全般</h2>
+							<a href="article1.html">アドオンって何？</a>
+							<a href="article2.html">アドオン初心者へ</a>
+							<a href="article3.html">知っておくべき用語集</a>
+							<a href="article4.html">パックの作り方(必須！)</a>
+							<a href="#">JSONとは？</a>
+							<a href="#">Molangについて</a>
+							<a href="#">知っておくと便利な小技</a>
+						</div>
+					</li>
+					<li><div style="margin: 0.5em; padding: 0.5em; background: #31AF37; color: #fff;">
+							<h2>リソース</h2>
+							<a href="#">ブロックのテクスチャ</a>
+							<a href="#">アイテムのテクスチャ</a>
+							<a href="#">エンティティのテクスチャ</a>
+							<a href="#">エンティティのモデリング</a>
+							<a href="#">エンティティのアニメーション</a>
+							<a href="#">サウンド(効果音)</a>
+							<a href="#">テキスト</a>
+							<a href="#">オリジナルのパーティクル</a>
+							<a href="#">マテリアル</a>
+							<a href="#">UI(上級者向け)</a>
+							<a href="#">シェーダ(上級者向け/制限あり)</a>
+							<a href="#">スキンパック</a>
+							<a href="#">RTX用のテクスチャ</a>
+							<a href="#">雑多</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #FF6169; color: #fff;">
+							<h2>ビヘイビア</h2>
+							<a href="#">オリジナルのブロック</a>
+							<a href="#">オリジナルのアイテム</a>
+							<a href="#">エンティティを改造</a>
+							<a href="#">オリジナルのエンティティ</a>
+							<a href="#">バイオーム</a>
+							<a href="#">フィーチャー(建造物・構造物)</a>
+							<a href="#">アニメーションコントローラ</a>
+							<a href="#">ScriptingAPI(上級者向け)</a>
+							<a href="#">ファンクション</a>
+							<a href="#">ルートテーブル</a>
+							<a href="#">交易テーブル</a>
+							<a href="#">レシピ</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<div><span class="desc">LatestUpdate : 2021/01/19</span></div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="margin: 1.5em;">
+		<h1>アドオン初心者へ</h1>
+		<div class="mini_idx">
+		<span class="mokuzi">もくじ</span>
+		・アドオン作りの心構え<br>
+		・必要な知識<br>
+		・必要なもの/ツール<br>
+		・手をつける順番
+		</div><br>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">アドオン作りの心構え</span><br></div>
+		<p>
+		　わりといろんなひとが作っていますが、<b>簡単だと思ってると挫折しかねない</b>です。レッドストーン回路で「自動○○機の作り方」などといった動画があると思いますが、あんな感じで<b>やり方や手順を完全に真似しても自分の思うものは作れません</b>。
+		例えば、レッドストーン回路がよくわからないからといって畑の「自動収穫機」を動画で完全に真似て作ったとしましょう。当然、それだけで「隠し階段」が作れる訳がありません。気持ちはわかりますが、はじめて<b>アドオンを作るひとはどうしても自分の作りたいものへまっしぐら</b>で、<b>基本をすっぽかそうとする</b>傾向にあります。
+		その挙げ句、基本のところでミスをしたときにどこでミスしたのかわからず、知識のあるひとたちに頼りきりになってしまうというわけです。<br>
+		　質問するのは面倒、自分の思い通りになかなかいかない、……などとストレスがたまっていき、最終的には<b>嫌になってやめてしまいます</b>。<br>
+		　<b>「どうせわかる」「ここは読まなくていいか」は禁物</b>です。わたしもできるだけ「これ作れるようになるのまだ……？」とならないように<b>簡潔に、簡単に記事を書いていきたい</b>と思います！
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">必要な知識</span><br></div>
+		<p>
+		　知識といっても、<b>そこまで高度な知識は必要ありません</b>。パソコンを使わなくてもアドオンは作れますが、作る行程からしてパソコンで写真などのデータを扱えるぐらいがいいです。
+		</p>
+		<h2>・ファイルエクスプローラを使う</h2>
+		<p>
+		　名前は知らなくてもいいですが、パソコンであれスマホであれ、自分で撮った写真やダウンロードした画像、音楽、文書などのデータを整理したりするところです。「<b>ファイル</b>」「<b>フォルダ</b>」「<b>ファイルパス</b>」「<b>解凍</b>」「<b>圧縮</b>」これらのうちでわからないものは調べたほうがいいでしょう。これからこの五つの単語は当たり前のように使っていきます。<br>
+		　<b>パソコンを使うひとは「拡張子」が見えるようにしておいてください</b>。エクスプローラー上部にある「表示」を押して右のほうの「ファイル名拡張子」にチェックを入れるなどすればできると思います。違ったら各自で調べてください。
+		</p>
+		<h2>・英語ができると有利</h2>
+		<p>
+		　英単語にまみれた世界に飛び込むことがあるので、英語の羅列を見ただけで「ダメだ～(*_*)」となってしまうひとはキツいです。それでも、翻訳アプリとかでいくらでもカンニングできるので、<b>よほど嫌いでない限りは大丈夫</b>でしょう。ただ、英単語をいくつか知っておくとどこに何が書いてあるのか瞬時に分かったりして便利です。例えば、アイテムを定義するファイルを見たときに「durability(耐久性)」という単語と数字が並んでいたらそこでアイテムの耐久値を指定するということが一目でわかります。
+		</p>
+		<h2>・数学も必要……？</h2>
+		<p>
+		　限られた分野ではありますが、難しいことをすればそれなりに数学力が必要となります。ただ、<b>単純にテクスチャを変えたりブロックやアイテムを追加するぶんにはまったく必要ありません</b>。モブを追加したりする際は<b>モブの体の形や手足の動きを作るときにある程度の空間把握能力がいる</b>かもしれません。立体が嫌いだったひとは要注意……？(しかし諦めるのは作り方に目を通してからにしましょう！)
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">必要なもの/ツール</span><br></div>
+		<p>　ぜんぶ無料でそろえられると思います。</p>
+		<h2>・ファイルエクスプローラ</h2>
+		<p>
+		　先ほども触れた、データを整理したりするやつです。<b>パソコンは標準搭載のファイルエクスプローラで構いません</b>。しかし、<b>スマホは標準搭載のものだとうまくファイルを扱えなかったりする</b>ので、アプリをダウンロードすることをおすすめします。<br>
+		　わたしはAndroidなんですが、「<a href="https://play.google.com/store/apps/details?id=com.alphainventor.filemanager">ファイルマネージャー</a>」というアプリを使っています。
+		</p>
+		<h2>・テキストエディタ</h2>
+		<p>
+		　パソコンで言うところのメモ帳のようなものです。ただ、<b>メモ帳でもできるとはいえいろいろ不便</b>なので、プログラミング向けのようなテキストエディタを入手することをおすすめします。最低でも文章を編集できるもの、それだと不便なので次の最低ラインは<b>左に行番号がふってあるもの</b>、<b>文字列の検索機能があるもの</b>、<b>画面の右端で勝手に改行(ワードラップ)しないもの</b>といったところでしょうか。「テキストエディタ」で検索して探してみましょう。<br>
+		　条件を欲張るならば、<b>「{ }」のはじまりと終わりを点線などで繋いでくれるもの</b>、<b>ハイライト(構文にあわせて色分けする機能)設定で「JSON」があるもの</b>、<b>「{ }」の組で中身を折り畳んで表示できるもの</b>、<b>構文ミスを指摘してくれるもの</b>──ここまでくるともはやパソコンのソフトでしか実現できないような条件ですが、最近のテキストエディタはすごくて、少なくともAndroid向けならこの条件のいくつか、またはすべて満たすアプリが無料で存在します。(しかしそのアプリは少し重いです)<br>
+		　わたしはAndroidでふたつめの最低条件を満たせる「<a href="https://play.google.com/store/apps/details?id=com.rhmsoft.edit">QuickEdit</a>」というものを使っています。
+		</p>
+		<div align="center">
+			<img src="img/pic2-1.png" width=80%><br>↑ 少し欲張ったアプリ「<a href="https://play.google.com/store/apps/details?id=com.rhmsoft.code">コードエディター</a>」
+		</div>
+		<h2>・テンプレート</h2>
+		<p>
+		　公式が配布しているアドオンのテンプレートです。何も変更や追加を加えていない、いわゆる<b>バニラのデータがだいたいすべて入っています</b>。<br>
+		　ここで手に入ります→<a href="https://www.minecraft.net/ja-jp/addons/">公式サイト</a>
+		</p>
+		<div align="center"><img src="img/pic2-2.png" width=80%></div>
+		<p>
+		　マインクラフト本体にアップデートが入ると、適宜この<b>テンプレートも新しいバージョン向けに更新される</b>ので、<b>アップデートのたびに新しいものを手に入れることをおすすめします</b>。その際古いものも使えないことはないので何でもかんでも消さないで残しておくのがいいです。<br><br>
+		
+		　このテンプレートを手に入れたら<b>解凍しておきましょう</b>。適当な場所でそのまま解凍するよりは、アドオン専用のフォルダを新しく用意してそこで解凍するのがいいでしょう。その他整理の面は各自で行ってください。
+		</p>
+		<h2>・ペイントツール</h2>
+		<p>
+		　主にテクスチャを描くためのものです。<b>ドット絵が描けるものならば何でもいいと思います</b>。リソースパックを専門としていなくとも、<b>オリジナルのブロックやアイテム、モブを追加する際にわりと必要になります</b>。<br>
+		　わたしはAndroidで描く用に「<a href="https://play.google.com/store/apps/details?id=com.PixelStudio">PixelStudio</a>」、加工用に「<a href="https://play.google.com/store/apps/details?id=com.iudesk.android.photo.editor">PhotoEditor</a>」を使っています。
+		</p>
+		<h2>・やる気と根性</h2>
+		<p>
+		　アドオンというものは、<b>なかなか自分の思い通りにいかない</b>ものです。長い間経験を積んでたくさんのひとの需要にさらされるような素晴らしい作品を作っているひとや、自称「全分野習得済み」でありこの記事を書いているわたしですら<b>失敗に渋ることがあるほど</b>です。すべては自分の作りたいもののためだと思って、<b>根気よく丁寧に進めていくことが完成への近道</b>です。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">手をつける順番</span><br></div>
+		<p>
+		　さて、必要なものも揃ったということで、早速作り方の本題に入っていこうと思います。アドオンというものは実に広い世界なので、難易度で順番をある程度決めることができます。そこで、この初心者向け記事では、<b>初心者におすすめするはじめの順番を提供します</b>。まずは知らないといけないことから、次に経験しておいたほうがいいこと──といった感じで広い空へ飛び立つための滑走路を用意します。<br>
+		　そこで、自分のやりたいことができるまで待たせるようなことにはせずに、できるだけ近道を目指すことを約束します！
+		</p>
+		<div style="position: relative; margin: 1em; text-align: center;">
+			<hr>
+			<span style="font-size: 32px; position:absolute; top: -16px; right: 0%; left: 0%;">
+			<span style="background: #FFF5D0;">
+			<img src="img/caution.png" width=24px>&nbsp;以下執筆中&nbsp;<img src="img/caution.png" width=24px>
+			</span>
+			</span>
+		</div>
+		</div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="text-align: right; margin: 0.5em;"><span style="font-size: 70%;">© Rinca Hayamine 2021</span></div>
+	</body>
+</html>

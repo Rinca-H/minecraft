@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>ブロックのテクスチャ - アドオン教習所</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <!-- <pre><code class="json">//コード</code></pre> -->
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" type="text/css" href="addon_school.css">
+		<link rel="shortcut icon" href="img/favicon.ico">
+	</head>
+	<body style="margin: 0px; background: #FFF5D0;">
+		<header class="header">
+			<a href="home.html"><img src="img/logo_black.png" style="display: inline-block; height: 3em;"></a>
+			<input type="checkbox" id="menu-btn-check">
+			<label for="menu-btn-check" class="menu-btn"><span></span></label>
+			<div class="menu-content">
+				<ul>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #595959; color: #fff;">
+							<h2>このサイトについて</h2>
+							<a href="home.html#whatslike">どんなサイト？</a>
+							<a href="home.html#profile">書いてるひとProfile</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #587EFF; color: #fff;">
+							<h2>アドオン全般</h2>
+							<a href="article1.html">アドオンって何？</a>
+							<a href="article2.html">アドオン初心者へ</a>
+							<a href="article3.html">知っておくべき用語集</a>
+							<a href="article4.html">パックの作り方(必須！)</a>
+							<a href="#">JSONとは？</a>
+							<a href="#">Molangについて</a>
+							<a href="#">知っておくと便利な小技</a>
+						</div>
+					</li>
+					<li><div style="margin: 0.5em; padding: 0.5em; background: #31AF37; color: #fff;">
+							<h2>リソース</h2>
+							<a href="article8">ブロックのテクスチャ</a>
+							<a href="#">アイテムのテクスチャ</a>
+							<a href="#">エンティティのテクスチャ</a>
+							<a href="#">エンティティのモデリング</a>
+							<a href="#">エンティティのアニメーション</a>
+							<a href="#">サウンド(効果音)</a>
+							<a href="#">テキスト</a>
+							<a href="#">オリジナルのパーティクル</a>
+							<a href="#">マテリアル</a>
+							<a href="#">UI(上級者向け)</a>
+							<a href="#">シェーダ(上級者向け/制限あり)</a>
+							<a href="#">スキンパック</a>
+							<a href="#">RTX用のテクスチャ</a>
+							<a href="#">雑多</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #FF6169; color: #fff;">
+							<h2>ビヘイビア</h2>
+							<a href="#">オリジナルのブロック</a>
+							<a href="#">オリジナルのアイテム</a>
+							<a href="#">エンティティを改造</a>
+							<a href="#">オリジナルのエンティティ</a>
+							<a href="#">バイオーム</a>
+							<a href="#">フィーチャー(建造物・構造物)</a>
+							<a href="#">アニメーションコントローラ</a>
+							<a href="#">ScriptingAPI(上級者向け)</a>
+							<a href="#">ファンクション</a>
+							<a href="#">ルートテーブル</a>
+							<a href="#">交易テーブル</a>
+							<a href="#">レシピ</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<div style="position: relative;">
+			<div style="position: absolute; bottom: 5%; color: #fff; font-size: 60px; margin: 0.5em;" width=75%>ブロックのテクスチャ</div>
+			<img src="img/test_dark.png" width=100%>
+		</div>
+		<div><span class="desc">LatestUpdate : 2021/01/19</span></div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="margin: 1.5em;">
+		<h1>ブロックのテクスチャ</h1><br>
+		<details><summary style="color: transparent;"><span><b>＋</b> もくじ</span></summary><br>
+		<div class="mini_idx">
+		<span class="mokuzi">もくじ</span>
+		・テクスチャの差し替え(基本)<br>
+		・terrain_texture.jsonの使い方<br>
+		・blocks.jsonの使い方<br>
+		・テクスチャをアニメーションさせる
+		</div></details><br>
+		<p>
+		　ブロックのリソースに関することをまとめていきたいと思います。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #31AF37;">テクスチャの差し替え</span><br></div>
+		<p>
+		　普通にテクスチャを変えるだけなら、画像ファイルを差し替えるだけでできます。場所は「(リソース)/textures/blocks」です。テンプレートから変更する場合、変更に関係ないファイルはすべて消してしまいましょう。
+		</p>
+		<div align="center">
+		<div style="margin: 0px 2em; padding: 1em; background: #CCCCFF; display: inline-block; margin: 1em;" align="left">
+		(リソースパック)┳textures<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┃┗blocks<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┃　┗(画像ファイル)<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┣manifest.json<br>
+		&nbsp;　　　　　　　&nbsp;&nbsp;┗pack_icon.json<br>
+		</div></div>
+		<p>
+		　ここで気をつけてほしいのは、.tgaファイルの扱い方です。透明な部分を含むテクスチャファイルにはときどき拡張子が「.png」ではなく「.tga」であることがあります。このままでは多くのペイントツールは扱えないのでこの場合は、名前から「tga」を「png」に書き換えるのではなく、コンバータを使ってpngに変換してからテクスチャを書き換え、新しく画像を用意するときでもpngからtgaに変換して追加しましょう。
+		コンバータについては、新しくソフトやアプリを用意する必要はなく、「tga png 変換」などと検索すればオンラインで変換してくれるものが出てきます。
+		</p>
+		<hr>
+		<p>
+		　そもそも、ブロックのリソースはこのように紐付けされています。
+		</p>
+		<div align="center">
+		<div style="margin: 0px 2em; padding: 1em; background: #CCCCFF; display: inline-block; margin: 1em;">
+			ブロック本体　→　①blocks.jsonで「terrainID」を指定　→　②terrain_texture.jsonでテクスチャを指定　→　テクスチャ
+		</div></div>
+		<p>
+		　少しこれから説明する内容のネタバレになりますが、例えば草ブロックなら、blocks.jsonで上面は「grass_top」、側面は「grass_side」、下面は「grass_bottom」というterrainIDを参照します。そして、それぞれのterrainIDにあたるテクスチャをterrain_texture.jsonで参照します。<br>
+		　なぜ二段階に分けたのかはわたしにもわかりません。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #31AF37;">terrain_texture.jsonの使い方</span><br></div>
+		<p>
+		　terrain_texture.jsonでは主に「<ruby><rb>terrain</rb><rp>(</rp><rt>タレイン</rt><rp>)</rp></ruby>ID」というものを定義します。ここでしか通用しない呼び方ですが、毎度「ココの文字列」と言うわけにもいかないので独自で命名しました。<br>
+		　このjsonの大まかな作りはこのようになっています。
+		</p>
+		<pre><code class="json">{
+  "num_mip_levels" : 4,
+  "padding" : 8,
+  "resource_pack_name" : "vanilla",
+  "texture_data" : {
+    "acacia_planks" : {
+      "textures" : "textures/blocks/planks_acacia"
+    },
+    ...
+  }
+}</code></pre>
+		<p>
+		　上部にある「num_mip_levels」「padding」「resource_pack_name」に変更を加える必要はありません。<br>
+		　上の例では、「acacia_planks」がterrainIDとなり、そのIDに対してテクスチャの<ruby><rb>在りか</rb><rp>(</rp><rt>・・・</rt><rp>)</rp></ruby>が指定されています。<br>
+		　在りかを示すファイルパスは自由ですが、基本的にブロックのテクスチャは「textures/blocks/○○」に置いてあると思うのですべて「textures/blocks/○○」という指定になると思います。
+		</p>
+		<h3>・データ値ごとにテクスチャを変える</h3>
+		<p>
+		　同じ木材ブロックでも「データ値」が異なれば見た目の種類(樫/白樺/トウヒ/...etc)が変わります。つまり、同じブロックに対して複数のパターンのテクスチャが用意されているということです。
+		※もともとデータ値の概念があるブロックでないと適用されません。つまり、もともとデータ値がないブロックに複数のテクスチャを指定しても、コマンドでデータ値を変えて出したときにテクスチャは変わりません。<br>
+		　それを実現するには、一つのterrainIDに対して複数のテクスチャを参照してあげます。
+		</p>
+		<pre><code class="json">"(terrainID)": {
+  "textures": [
+    "(テクスチャ1)",
+    "(テクスチャ2)",
+    "(テクスチャ3)",
+    ...
+  ]
+}</code></pre>
+		<h3>・ランダムなテクスチャ</h3>
+		<p>
+		　バニラのブロックにはありませんが、置く場所によってランダムでテクスチャが決まるということもできます。
+		</p>
+		<pre><code class="json">"(terrainID)": {
+  "textures": {
+    "variations": [
+      { "path": "(テクスチャ1)" },
+      { "path": "(テクスチャ2)" },
+      { "path": "(テクスチャ3)" },
+      ...
+    ]
+  }
+}</code></pre>
+		<h3>・重ねて色づけする</h3>
+		<pre><code class="json">"(terrainID)": {
+  "textures": {
+    "overlay_color": "(カラーコード)",
+    "path": "(テクスチャ)"
+  }
+}</code></pre>
+		<h3>・色づけする</h3>
+		<pre><code class="json">"(terrainID)": {
+  "textures": {
+    "tint_color": "(カラーコード)",
+    "path": "(テクスチャ)"
+  }
+}</code></pre>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #31AF37;">blocks.jsonの使い方</span><br></div>
+		<p>
+		　こちらではブロックのテクスチャだけでなく、主にブロックのリソース全般に対して紐付けをします。ほとんどは見た目に関する設定ですが、そのブロックに関するサウンドも紐付けするのはblocks.jsonの仕事です。<br>
+		　大まかな形は以下のようになっています。
+		</p>
+		<pre><code class="json">{
+  "acacia_button" : {
+    "sound" : "wood",
+    "textures" : "acacia_planks"
+  },
+  ...
+}</code></pre>
+		<p>
+		　上の例で「acacia_button」となっている部分にはブロックのIDを書きます。バニラのブロックはネームスペース(minecraft:)がなくてもコマンドで出せるように省略できますが、オリジナルのブロックはネームスペースが必須となります。<br>
+		　「sound」でサウンドの種類を指定します。選べるのは以下の表の通り。ここでは「壊したとき」「掘っているとき」「置いたとき」「落ちてきたとき」「上でジャンプしたとき」「降りてきたとき」「上を歩くとき」の音を決めます。<br>
+		　sounds.jsonを見るとオリジナルのサウンドも追加できそうですが、現状できません。
+		</p>
+		<details><summary style="color: transparent;"><span><b>＋</b> 表</span></summary><br>
+		<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF;">
+			<tr><th>サウンドの種類</th><th>備考</th></tr>
+			<tr><td>ancient_debris</td><td>古代のがれき</td></tr>
+			<tr><td>anvil</td><td>金床</td></tr>
+			<tr><td>bamboo</td><td>竹</td></tr>
+			<tr><td>bamboo_sapling</td><td>たけのこ</td></tr>
+			<tr><td>basalt</td><td>玄武岩</td></tr>
+			<tr><td>bone_block</td><td>骨ブロック</td></tr>
+			<tr><td>chain</td><td>チェーン</td></tr>
+			<tr><td>cloth</td><td>ウール</td></tr>
+			<tr><td>coral</td><td>サンゴ</td></tr>
+			<tr><td>fungus</td><td>深紅のキノコ、歪んだキノコ</td></tr>
+			<tr><td>glass</td><td>ガラス</td></tr>
+			<tr><td>grass</td><td>草ブロック</td></tr>
+			<tr><td>gravel</td><td>砂利、土</td></tr>
+			<tr><td>honey_block</td><td>ハチミツブロック</td></tr>
+			<tr><td>itemframe</td><td>額縁</td></tr>
+			<tr><td>ladder</td><td>はしご</td></tr>
+			<tr><td>lantern</td><td>ランタン</td></tr>
+			<tr><td>lodestone</td><td>ロードストーン</td></tr>
+			<tr><td>metal</td><td>鉄ブロック、コマンドブロック</td></tr>
+			<tr><td>nether_brick</td><td>ネザーレンガブロック</td></tr>
+			<tr><td>nether_gold_ore</td><td>ネザー金鉱石</td></tr>
+			<tr><td>nether_sprouts</td><td>ネザースプラウト　<img src="img/pic8-1.png" width=24px></td></tr>
+			<tr><td>nether_wart</td><td>ネザーウォート</td></tr>
+			<tr><td>netherite</td><td>ネザライトブロック</td></tr>
+			<tr><td>netherrack</td><td>ネザーラック</td></tr>
+			<tr><td>normal</td><td>デフォルト(石)</td></tr>
+			<tr><td>nylium</td><td>ナイリウム</td></tr>
+			<tr><td>roots</td><td>根　<img src="img/pic8-2.png" width=24px><img src="img/pic8-3.png" width=24px></td></tr>
+			<tr><td>sand</td><td>砂</td></tr>
+			<tr><td>scaffolding</td><td>足場ブロック</td></tr>
+			<tr><td>shroomlight</td><td>シュルームライト</td></tr>
+			<tr><td>slime</td><td>スライムブロック</td></tr>
+			<tr><td>snow</td><td>雪</td></tr>
+			<tr><td>soul_sand</td><td>ソウルサンド</td></tr>
+			<tr><td>soul_soil</td><td>ソウルソイル</td></tr>
+			<tr><td>stem</td><td>深紅の茎、歪んだ茎</td></tr>
+			<tr><td>stone</td><td>石</td></tr>
+			<tr><td>sweet_berry_bush</td><td>スイートベリーの低木</td></tr>
+			<tr><td>turtle_egg</td><td>カメの卵</td></tr>
+			<tr><td>vines</td><td>ツタ</td></tr>
+			<tr><td>wood</td><td>木</td></tr>
+		</table>
+		</details><br>
+		<p>
+		　「textures」ではterrainIDを指定します。
+		<h3>・面ごとにテクスチャを指定</h3>
+		<p>
+		　作業台など、面によってテクスチャが異なるようにする場合を紹介します。<br>
+		　ここで注意してほしいのは、ディスペンサや原木などプレイヤーの向きなどによって「置く向き」を変えられるブロックに関しては、もともとその機能が備わっているブロックでないとできません。例えば、土ブロックのテクスチャを原木のテクスチャに変えて、ブロックを置いたときに横か縦か決められるようにはできません。<br>
+		　以下は古代のがれきと玄武岩の場合です。
+		</p>
+		<pre><code class="json">"ancient_debris": {
+  "sound" : "ancient_debris",
+  "textures": {
+    "down": "ancient_debris_top",
+    "east": "ancient_debris_side",
+    "north": "ancient_debris_side",
+    "south": "ancient_debris_side",
+    "up": "ancient_debris_top",
+    "west": "ancient_debris_side"
+  }
+}</code></pre><pre><code class="json">"basalt": {
+  "sound": "basalt",
+  "textures": {
+    "down": "basalt_top",
+    "side": "basalt_side",
+    "up": "basalt_top"
+  }
+}</code></pre>
+		<p>
+		　それぞれこのように割り当てられています。
+		</p>
+		<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF;">
+			<tr><th>プロパティ名</th><th>備考</th></tr>
+			<tr><td>down</td><td>下面</td></tr>
+			<tr><td>east</td><td>東面</td></tr>
+			<tr><td>north</td><td>北面</td></tr>
+			<tr><td>side</td><td>東西南北面まとめて指定<br>この場合eastやnorthなどは書く必要はありません</td></tr>
+			<tr><td>south</td><td>南面</td></tr>
+			<tr><td>up</td><td>上面</td></tr>
+			<tr><td>west</td><td>西面</td></tr>
+		</table>
+		<h3>・手に持っているときのテクスチャ</h3>
+		<p>
+		　以下はサンゴブロックの例です。<br>
+		　面ごとにテクスチャを指定することもできます。
+		</p>
+		<pre><code class="json">"coral": {
+  "carried_textures": "coral",
+  "sound": "stone",
+  "textures": "coral"
+}</code></pre>
+		<h3>・向きをランダムに</h3>
+		<p>
+		　以下は粘土の例です。<br>
+		　面ごとに指定することもできます。
+		</p>
+		<pre><code class="json">"clay": {
+  "isotropic" : true,
+  "sound" : "gravel",
+  "textures" : "clay"
+}</code></pre>
+		<h3>・明るさ(ガンマ)を指定する</h3>
+		<p>
+		　以下はネザーレンガブロックの例です。
+		</p>
+		<pre><code class="json">"nether_brick": {
+  "brightness_gamma": 0.80,
+  "sound": "nether_brick",
+  "textures": "nether_brick"
+}</code></pre>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #31AF37;">テクスチャをアニメーションさせる</span><br></div>
+		<p>
+		　ネザーポータルや炎、溶岩やマグマブロックなど、動くテクスチャは「flipbook_textures.json」を使うことになります。<br>
+		　アニメーションさせたいテクスチャはマンガのように、縦長に1コマ1コマ繋げて描きます。しくみこそ「パラパラマンガ」ですが、テクスチャは普通の「マンガ」のように描くことになるんですね。<br>
+		　大まかな形はこのようになります。
+		</p>
+		<pre><code class="json">[
+  {
+    "flipbook_texture": "textures/blocks/huge_fungus/crimson_log_side",
+    "atlas_tile": "crimson_log_side",
+    "ticks_per_frame": 15
+  },
+  ...
+]</code></pre>
+		<p>
+		　「flipbook_texture」でテクスチャのファイルパス、「atlas_tile」でterrainIDを指定します。「ticks_per_frame」でパラパラマンガをパラパラするスピードを変えます。「1コマに何tickかかるか」で指定し、数値が大きいほど遅くなります。
+		</p>
+		<div style="position: relative; margin: 1em; text-align: center;">
+			<hr>
+			<span style="font-size: 32px; position:absolute; top: -16px; right: 0%; left: 0%;">
+			<span style="background: #FFF5D0;">
+			<img src="img/caution.png" width=24px>&nbsp;以下執筆中&nbsp;<img src="img/caution.png" width=24px>
+			</span>
+			</span>
+		</div><br><br>
+		<h3>・コマの順番を指定する</h3>
+		<h3>・アニメーションの方式</h3>
+		<h3>・インデックスごとに指定</h3>
+		<h3>・繰り返す</h3>
+		</div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="text-align: right; margin: 0.5em;"><span style="font-size: 70%;">© Rinca Hayamine 2021</span></div>
+	</body>
+</html>

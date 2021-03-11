@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>知っておくべき用語集 - アドオン教習所</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <!-- <pre><code class="json">//コード</code></pre> -->
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" type="text/css" href="addon_school.css">
+		<link rel="shortcut icon" href="favicon.ico">
+	</head>
+	<body style="margin: 0px; background: #FFF5D0;">
+		<header class="header">
+			<a href="home.html"><img src="img/logo_black.png" style="display: inline-block; height: 3em;"></a>
+			<input type="checkbox" id="menu-btn-check">
+			<label for="menu-btn-check" class="menu-btn"><span></span></label>
+			<div class="menu-content">
+				<ul>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #595959; color: #fff;">
+							<h2>このサイトについて</h2>
+							<a href="home.html#whatslike">どんなサイト？</a>
+							<a href="home.html#profile">書いてるひとProfile</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #587EFF; color: #fff;">
+							<h2>アドオン全般</h2>
+							<a href="article1.html">アドオンって何？</a>
+							<a href="article2.html">アドオン初心者へ</a>
+							<a href="article3.html">知っておくべき用語集</a>
+							<a href="article4.html">パックの作り方(必須！)</a>
+							<a href="#">JSONとは？</a>
+							<a href="#">Molangについて</a>
+							<a href="#">知っておくと便利な小技</a>
+						</div>
+					</li>
+					<li><div style="margin: 0.5em; padding: 0.5em; background: #31AF37; color: #fff;">
+							<h2>リソース</h2>
+							<a href="#">ブロックのテクスチャ</a>
+							<a href="#">アイテムのテクスチャ</a>
+							<a href="#">エンティティのテクスチャ</a>
+							<a href="#">エンティティのモデリング</a>
+							<a href="#">エンティティのアニメーション</a>
+							<a href="#">サウンド(効果音)</a>
+							<a href="#">テキスト</a>
+							<a href="#">オリジナルのパーティクル</a>
+							<a href="#">マテリアル</a>
+							<a href="#">UI(上級者向け)</a>
+							<a href="#">シェーダ(上級者向け/制限あり)</a>
+							<a href="#">スキンパック</a>
+							<a href="#">RTX用のテクスチャ</a>
+							<a href="#">雑多</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #FF6169; color: #fff;">
+							<h2>ビヘイビア</h2>
+							<a href="#">オリジナルのブロック</a>
+							<a href="#">オリジナルのアイテム</a>
+							<a href="#">エンティティを改造</a>
+							<a href="#">オリジナルのエンティティ</a>
+							<a href="#">バイオーム</a>
+							<a href="#">フィーチャー(建造物・構造物)</a>
+							<a href="#">アニメーションコントローラ</a>
+							<a href="#">ScriptingAPI(上級者向け)</a>
+							<a href="#">ファンクション</a>
+							<a href="#">ルートテーブル</a>
+							<a href="#">交易テーブル</a>
+							<a href="#">レシピ</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<div><span class="desc">LatestUpdate : 2021/01/19</span></div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="margin: 1.5em;">
+		<h1>知っておくべき用語集</h1><br>
+		<details><summary style="color: transparent;"><span><b>＋</b> もくじ</span></summary><br>
+		<div class="mini_idx">
+		<span class="mokuzi">もくじ</span>
+		<h4>■ 必須単語</h4>
+		・BE<br>
+		・テクスチャ<br>
+		・エンティティ<br>
+		・テンプレート<br>
+		・リファレンス<br>
+		<h4>■ 場合によっては必須</h4>
+		・ルートテーブル<br>
+		・バイオーム<br>
+		・フィーチャー<br>
+		<h4>■ 中・上級者向け</h4>
+		・ネームスペース(プリフィックス)<br>
+		・コンポーネント<br>
+		<h4>■ このサイト特有</h4>
+		・id<br>
+		・TerrainID<br>
+		</div></details><br>
+		<p>　そこまで難しくないはずですが、「必須単語」は解説で当たり前のように使う単語がほとんどなのでぜひとも覚えておきましょう。</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">必須単語</span></div><br>
+		<h2>・BE</h2>
+		<p>
+		　JE(Java版)に対して<b>統合版を指す呼び方</b>です。統合版は元々「<ruby><rb>BedrockEdition</rb><rp>(</rp><rt>ベッドロックエディション</rt><rp>)</rp></ruby>」というのでそこから「BE」ということです。<b>アドオン界では「統合版」と呼ぶより「BE」と呼ぶことのほうが多い</b>のでこのサイトではこちらで統一します。ちなみに、BEのコンテンツのひとつに「教育版」がありますが、そちらも「<ruby><rb>EducationEdition</rb><rp>(</rp><rt>エデュケーションエディション</rt><rp>)</rp></ruby>」から「EE」と呼ぶことがあります。
+		たまに界隈で話題になりますが、PE(PocketEdition = スマホ版)は当然現在BEへと統合されているので存在しません。もしこのサイトで言っていたら統合される前の時代の話をしているか、BEでもスマホにしかない仕様について話すときにあえてPCと分けるためにPEと呼ぶことがあります。ごっちゃにならないようにしてください。
+		</p>
+		<h2>・テクスチャ</h2>
+		<p>
+		　<b>ブロックやアイテム、モブの見た目</b>のことです。リソースパックで追加・変更をします。リソースパックのことを「テクスチャパック」と呼ぶ文化がありますが、それはJEでの呼び方なので、このサイトでは「リソースパック」で統一します。
+		</p>
+		<h2>・エンティティ</h2>
+		<p>
+		　<b>エンティティのほとんどばモブ</b>です。例えば、<b>ゾンビやスケルトン、村人やプレイヤーなどのモブである生き物はすべてエンティティ</b>です。しかし、コマンドをやっているひとならば詳しいと思いますが、生き物以外にもエンティティと分類されるものがあります。例えば、<b>矢、防具立て、トロッコ、ガストの火の玉、落下中のブロック、エンドクリスタル</b>……などなど、<b>/killコマンドが通用するものはすべてエンティティ</b>となります。
+		</p>
+		<h2>・テンプレート</h2>
+		<p>
+		　特にこのサイトでは、事前に断らない限り公式テンプレートのことを指すと思ってください。「<a href="addon_school_biginner.html">アドオン初心者へ</a>」で配布場所を紹介したものです。
+		</p>
+		<h2>・リファレンス</h2>
+		<p>
+		　ビヘイビアパックのテンプレートの「documents」フォルダのなかにある、<b>公式の説明書</b>です。すべて英語で書かれており、<b>翻訳ツールなどを使って読むことになる</b>と思います。<b>このサイトでは書ききれない膨大な内容を一覧で載せていたりする</b>こともあり、一部<b>リファレンスに頼ることがある</b>と思うので消さないでください。「htmlビューア」というものがない場合、このファイルを開くときにブラウザを使うことがありますが、決して変な場所に飛ばされる訳ではないのでご安心ください。もし、ブラウザで開くことになってもインターネットを使わないのでオフラインでも開けるはずです。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">場合によっては必須</span></div><br>
+		<h2>・ルートテーブル</h2>
+		<p>
+		　<b>モブを倒したとき、またはブロックを壊したときにドロップする(落とす)アイテムを指定するデータのこと</b>です。また、<b>釣りで手に入るアイテム</b>や<b>自然生成されるチェストの中身</b>のデータも同じ作り方でできているのでルートテーブルと呼びます。
+		</p>
+		<h2>・バイオーム</h2>
+		<p>
+		　Minecraft の世界における地形や植物群、高度、温度、湿度、空の色、植物の色など、様々な自然の要素を決める地域のことである。バイオームは、生成された全ての世界を、森林、ジャングル、砂漠、タイガなどの異なる環境に分けている。( <a href="https://minecraft-ja.gamepedia.com/%E3%83%90%E3%82%A4%E3%82%AA%E3%83%BC%E3%83%A0">https://minecraft-ja.gamepedia.com/%E3%83%90%E3%82%A4%E3%82%AA%E3%83%BC%E3%83%A0</a>より抜粋)
+		</p>
+		<h2>・フィーチャー</h2>
+		<p>
+		　本来は訳が「特徴」であることから、ゲームの仕様やコンテンツそのものを指しますが、ここではワールドに自然生成される建造物や構造物のことを指します。例えば、村やネザー要塞、鉱石や木にいたるまで、ワールドを飾るものはだいたいそうです。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">中/上級者向け</span></div><br>
+		<h2>・ネームスペース(プリフィックス)</h2>
+		<p>
+		　<b>identifierのコロン(：)より前の部分を指します</b>。ゾンビのidである<b>「minecraft:zombie」なら「minecraft」に当たる部分</b>です。オリジナルのコンテンツを追加するときには<b>「minecraft」をネームスペースに使ってはいけません</b>。だいたいパックごとに統一されます。<br>
+		　<b>原則半角英数字とアンダースコア(_)のみで構成し、先頭に数字が来てはいけません</b>。アルファベットは<b>大文字と小文字が区別されません</b>。万が一他のアドオンと同時に使用されることを想定して、<b>オリジナル性の高いものにしましょう</b>。たまたま<b>idがかぶってしまうと競合してしまいます</b>。<br>
+		　無理矢理日本語にした「名前空間」という呼び方についてわたしはあまりよく思っていません。ちなみにJEのMOD界隈ではmodIDと呼ばれているらしいですね。
+		</p>
+		<h2>・コンポーネント</h2>
+		<p>
+		　ブロックやアイテム、エンティティなどの<b>定義を構成する構成要素</b>です。コンポーネントのほとんどは「components」の中にあり「minecraft:」で始まるものです。オリジナルのコンテンツを作るときに自分でコンポーネントを追加したりすることになりますが、その際にカンマ( , )を忘れるなどしてミスの原因になります。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">このサイト特有</span></div><br>
+		<h2>・id</h2>
+		<p>
+		　「minecraft:zombie」などの<b>identifierのこと</b>です。界隈ではそのままidentifierと呼ばれることがほとんどですが、このサイトでは略してidと呼ぶことにします。いまさら旧コマンドのアイテムの数字idと思うひとはいないでしょう(データ値のことではないですよ)。
+		</p>
+		<h2>・<ruby><rb>Terrain</rb><rp>(</rp><rt>タレイン</rt><rp>)</rp></ruby>ID</h2>
+		<p>
+		　terrain_texture.jsonで定義する、ブロックとそのテクスチャを紐付けるために必要な途中部分のidです。似たような手法が用いられていることから、item_texture.jsonで定義されているものも便宜上同じく「TerrainID」と呼びます。下の画像の赤線部はすべてTerrainIDです。<br>
+		</p>
+		<div align="center" width=100%>
+			<div align="center" style="display: inline-block; margin: 0em 1em; width: 45%; vertical-align: middle;"><img src="img/pic3-1.png" width=100%><br>terrain_texture.json</div>
+			<div align="center" style="display: inline-block; margin: 0em 1em; width: 45%; vertical-align: middle;"><img src="img/pic3-2.png" width=100%><br>item_texture.json</div>
+		</div>
+		</div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="text-align: right; margin: 0.5em;"><span style="font-size: 70%;">© Rinca Hayamine 2021</span></div>
+	</body>
+</html>

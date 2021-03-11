@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>アドオンって何？ - アドオン教習所</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <!-- <pre><code class="json">//コード</code></pre> -->
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" type="text/css" href="addon_school.css">
+		<link rel="shortcut icon" href="img/favicon.ico">
+	</head>
+	<body style="margin: 0px; background: #FFF5D0;">
+		<header class="header">
+			<a href="home.html"><img src="img/logo_black.png" style="display: inline-block; height: 3em;"></a>
+			<input type="checkbox" id="menu-btn-check">
+			<label for="menu-btn-check" class="menu-btn"><span></span></label>
+			<div class="menu-content">
+				<ul>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #595959; color: #fff;">
+							<h2>このサイトについて</h2>
+							<a href="home.html#whatslike">どんなサイト？</a>
+							<a href="home.html#profile">書いてるひとProfile</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #587EFF; color: #fff;">
+							<h2>アドオン全般</h2>
+							<a href="article1.html">アドオンって何？</a>
+							<a href="article2.html">アドオン初心者へ</a>
+							<a href="article3.html">知っておくべき用語集</a>
+							<a href="article4.html">パックの作り方(必須！)</a>
+							<a href="#">JSONとは？</a>
+							<a href="#">Molangについて</a>
+							<a href="#">知っておくと便利な小技</a>
+						</div>
+					</li>
+					<li><div style="margin: 0.5em; padding: 0.5em; background: #31AF37; color: #fff;">
+							<h2>リソース</h2>
+							<a href="#">ブロックのテクスチャ</a>
+							<a href="#">アイテムのテクスチャ</a>
+							<a href="#">エンティティのテクスチャ</a>
+							<a href="#">エンティティのモデリング</a>
+							<a href="#">エンティティのアニメーション</a>
+							<a href="#">サウンド(効果音)</a>
+							<a href="#">テキスト</a>
+							<a href="#">オリジナルのパーティクル</a>
+							<a href="#">マテリアル</a>
+							<a href="#">UI(上級者向け)</a>
+							<a href="#">シェーダ(上級者向け/制限あり)</a>
+							<a href="#">スキンパック</a>
+							<a href="#">RTX用のテクスチャ</a>
+							<a href="#">雑多</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #FF6169; color: #fff;">
+							<h2>ビヘイビア</h2>
+							<a href="#">オリジナルのブロック</a>
+							<a href="#">オリジナルのアイテム</a>
+							<a href="#">エンティティを改造</a>
+							<a href="#">オリジナルのエンティティ</a>
+							<a href="#">バイオーム</a>
+							<a href="#">フィーチャー(建造物・構造物)</a>
+							<a href="#">アニメーションコントローラ</a>
+							<a href="#">ScriptingAPI(上級者向け)</a>
+							<a href="#">ファンクション</a>
+							<a href="#">ルートテーブル</a>
+							<a href="#">交易テーブル</a>
+							<a href="#">レシピ</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<div><span class="desc">LatestUpdate : 2021/01/19</span></div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="margin: 1.5em;">
+		<h1>アドオンって何？</h1>
+		<p>
+		　<b><ruby><rb>Add-On</rb><rp>(</rp><rt>アドオン</rt><rp>)</rp></ruby></b>とは、MinecraftBE(統合版)において、プレイヤーが各自で<b>既存のコンテンツを変更したり</b>、<b>オリジナルのコンテンツを追加したり</b>する外部の追加コンテンツのことです。<br>
+		　簡単に言えば、「公式が認めている改造」です。<b>公式が認めている</b>とはどういうことかと言うと、<a href="https://www.minecraft.net/ja-jp/addons/">Minecraftの公式サイト</a>で公式がアドオンというものについて紹介し、プレイヤーにアドオン作成を推しているからです。さらには、このページではアドオンのテンプレートも配布しています。ちなみにこのページは「マインクラフト　アドオン」と検索すれば一番上に出てくるものとなります。<br>
+		　少し入り込んだ話をすると、アドオンは大きく分けて「<b>リソースパック(テクスチャパック)</b>」と「<b>ビヘイビアパック</b>」という二つのものからなります。リソースパック(テクスチャパック)のほうなら馴染み深いひとが多いのではないでしょうか。よく「ビヘイビアパック」のみのことを指して「アドオン」と言うことがあるようですが、正しくはリソースパックも含めて「アドオン」であるので忘れないでおきましょう。<br>
+		　ちなみに<b>「MOD」とはまったく異なるものです</b>。MODは主にスマホで、MODを動かすための専用のアプリ(ランチャー)を介してマインクラフト本体を開くことによって使うものです。こちらは非公式で、ちゃんとしたプログラミングをして改造するものなのでさまざまなことを無理矢理動作させます。<br><br>
+			
+		　先に言っておくと、Windows10版やスマホ版(AndroidとiOS)ならアドオンを導入することができますが、<font color="red">NintendoSwitch版やPlayStation版には現状アドオンを導入することができません。</font>アドオンが導入可能なプラットフォームでアドオンを導入したワールドを開き、マルチプレイなどでそのワールドに参加するなどといった形なら遊ぶことができます。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">アドオンで何ができるの？</span></div><br>
+		<h2>・リソースパック</h2>
+		<p>
+		　こちらはよく知っているひとが多いと思います。マーケットプレイスにお世話になっているひとは、これから紹介する例を聞いて思い当たるものがあると思います。主にブロックやアイテム、モブなどの"見た目"である<b>テクスチャ</b>を変更します。さらには、見た目だけでなくいくつかの<b>サウンド(効果音)</b>にも変更を加えることができます。あとは、上級者向けとなりますが、<b>シェーダ</b>もリソースの分野になります。しかし現在シェーダはWindows10版では動作させることができません。
+		</p>
+		<h2>・ビヘイビアパック</h2>
+		<p>
+		　はじめにも少し言いましたが、ビヘイビアパックのほうで<b>既存のコンテンツに変更を加えたり、オリジナルのブロックやアイテム、モブを追加することができます。</b><br>
+		　まず既存のコンテンツへの変更についてです。例えばモブへの変更なら、<b>ゾンビの歩く速度を子ゾンビ以上に速く</b>したり、<b>スケルトンの射撃速度を尋常じゃないほどに高速に</b>したり、はたまた<b>クリーパーの爆発をとんでもないほど巨大にする</b>といったようなことができます。モブへの変更以外にも、<b>敵モブを倒したときに落とすアイテムの種類</b>や、<b>クラフトのレシピ</b>、<b>村人の交易内容</b>など、実に多くのものに変更を加えることができます。<br>
+		　次に、オリジナルのコンテンツ追加に関してです。まずは<b>オリジナルのブロック、アイテム、モブ</b>に加え、<b>バイオームやフィーチャー(建造物・構造物)</b>、そしてコマンドユーザーにはありがたい<b>ファンクション</b>の追加も可能です。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">簡単に作れる？</span></div>
+		<p>
+		　<b>簡単かどうかというと微妙</b>です。しかし、焦らずにきちんと手順を踏んでいけば、いつしか自分の思うままにアドオンを作ることができるようになります！<br>
+		　具体的な話をすると、アドオンを作る場合、ビヘイビアパックに深く関わっていけば関わっていくほど<b>プログラミングっぽくなっていきます</b>。以下の画像は、ゾンビを定義するファイルの冒頭部分です。パッと見たところでは難しそうですが、<b>丁寧に学んでいけばすぐに慣れます</b>。<br>
+		</p>
+		<div align="center"><img src="img/pic1-1.png" width=80%></div>
+		<p>
+		　先ほどから「きちんと」「丁寧に」としつこく言っていますが、例えば上の画像で「,(カンマ)」がひとつなくなっただけで<b>すべてが動作しなくなってしまいます</b>。このように、アドオンで主に使われる<ruby><rb>JSON</rb><rp>(</rp><rt>ジェイソン</rt><rp>)</rp></ruby>という構文はプログラミング言語と同じように<b>とてもデリケート</b>です。JSONといっても「AはBである」といったような<b>データの集まり</b>なので、英語を読んでいけばどれがどのデータを司るのかがわかり、ある程度独学で理解することは可能です。
+		しかし、自分でオリジナルのコンテンツを作成するときに、このJSONを<b>大幅に変更したり自分でイチから組み立てたりすることがある</b>ので、構文を理解しておらず「,」や「{」を抜かしてしまったり、間違った書き方を推測で書いたりしてしまって<b>なかなか成功しないという負のスパイラルに陥ることがある</b>と予想されます。そこで、そのあたりをきちんとこのサイトで学んでほしいと思っています。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">自動で作るアプリとかあるんじゃないの？</span></div>
+		<p>
+		　あったと思いますが、作れるものは至って<b>限定されています</b>。何としてでもそのアプリやツールを使って作りたいというなら強要はしませんが、いろんなものを追加したり変更したいという場合には、<b>自分で手作りすることをおすすめします</b>。これは個人的にですが、「楽して作ろう」という魂胆が嫌いというのもあります笑
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">PCじゃないと作れない？</span></div>
+		<p>
+		　そんなことはありません。スマホ一台でも十分作ることができます(AndroidもiOSも)。現にわたしは高校生のときスマホで作ってました。
+		</p>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #587EFF;">さあ、始めよう！</span></div>
+		　アドオンを自分で作ってみようと思いましたか？　作ってみようと思ったらまずは初心者の知識を揃えましょう！
+		<div align="center" style="margin: 5em;"><a href="article2.html" class="big_button">アドオン作りへ　▶</a></div>
+		</div>
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="text-align: right; margin: 0.5em;"><span style="font-size: 70%;">© Rinca Hayamine 2021</span></div>
+	</body>
+</html>

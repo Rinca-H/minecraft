@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title>ブロックのコンポーネント - アドオン教習所</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atelier-estuary-light.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <!-- <pre><code class="json">//コード</code></pre> -->
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" type="text/css" href="addon_school.css">
+		<link rel="shortcut icon" href="img/favicon.ico">
+	</head>
+	<body style="margin: 0px; background: #FFF5D0;">
+		<header class="header">
+			<a href="home.html"><img src="img/logo_black.png" style="display: inline-block; height: 3em;"></a>
+			<input type="checkbox" id="menu-btn-check">
+			<label for="menu-btn-check" class="menu-btn"><span></span></label>
+			<div class="menu-content">
+				<ul>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #595959; color: #fff;">
+							<h2>このサイトについて</h2>
+							<a href="home.html#whatslike">どんなサイト？</a>
+							<a href="home.html#profile">書いてるひとProfile</a>
+							<a href="article-data00.html">データ早見</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #587EFF; color: #fff;">
+							<h2>アドオン全般</h2>
+							<a href="article-a01.html">アドオンって何？</a>
+							<a href="article-a02.html">アドオン初心者へ</a>
+							<a href="article-a03.html">知っておくべき用語集</a>
+							<a href="article-a04.html">パックの作り方(必須！)</a>
+							<a href="article-a05.html">JSONとは？</a>
+							<a href="article-a06.html">Molangについて</a>
+							<a href="#">知っておくと便利な小技</a>
+						</div>
+					</li>
+					<li><div style="margin: 0.5em; padding: 0.5em; background: #31AF37; color: #fff;">
+							<h2>リソース</h2>
+							<a href="article-r01.html">ブロックのテクスチャ</a>
+							<a href="article-r02.html">アイテムのテクスチャ</a>
+							<a href="article-r03.html">エンティティのテクスチャ</a>
+							<a href="article-r04.html">エンティティのモデリング</a>
+							<a href="article-r05.html">エンティティのアニメーション</a>
+							<a href="article-r06.html">サウンド(効果音)</a>
+							<a href="article-r07.html">テキスト</a>
+							<a href="article-r08.html">オリジナルのパーティクル</a>
+							<a href="article-r09.html">マテリアル</a>
+							<a href="article-r10.html">UI(上級者向け)</a>
+							<a href="article-r11.html">シェーダ(上級者向け/制限あり)</a>
+							<a href="article-r12.html">スキンパック</a>
+							<a href="article-r13.html">RTX用のテクスチャ</a>
+							<a href="article-r14.html">雑多</a>
+						</div>
+					</li>
+					<li>
+						<div style="margin: 0.5em; padding: 0.5em; background: #FF6169; color: #fff;">
+							<h2>ビヘイビア</h2>
+							<a href="article-b01.html">オリジナルのブロック</a>
+							<a href="article-b02.html">オリジナルのアイテム</a>
+							<a href="article-b03.html">エンティティを改造</a>
+							<a href="article-b04.html">オリジナルのエンティティ</a>
+							<a href="article-b05.html">バイオーム</a>
+							<a href="article-b06.html">フィーチャー(建造物・構造物)</a>
+							<a href="article-b07.html">アニメーションコントローラ</a>
+							<a href="article-b08.html">ScriptingAPI(上級者向け)</a>
+							<a href="article-b09.html">ファンクション</a>
+							<a href="article-b10.html">ルートテーブル</a>
+							<a href="article-b11.html">交易テーブル</a>
+							<a href="article-b12.html">レシピ</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<div><span class="desc">LatestUpdate : 2021/01/19</span></div>
+		<div style="margin: 2em;">　</div>
+		<div style="margin: 1.5em;">
+		<h1>データ早見</h1><br>
+		<details><summary style="color: transparent;"><span><b>＋</b> もくじ</span></summary><br>
+		<div class="mini_idx">
+		<span class="mokuzi">もくじ</span>
+		・コンポーネント(基本)<br>
+		・コンポーネント(イベントトリガー)<br>
+		・イベントファンクション<br>
+		</div></details><br>
+		<div style="margin: 1.5em 1em;"><span class="headline" style="border-left: solid 10px #595959;">コンポーネント(基本)</span><br></div>
+		<p>
+		　以下コンポーネント名のアルファベット順です。
+		</p>
+		<div style="position: relative; margin: 1em; text-align: center;">
+			<hr>
+			<span style="font-size: 32px; position:absolute; top: -16px; right: 0%; left: 0%;">
+			<span style="background: #FFF5D0;">
+			<img src="img/caution.png" width=24px>&nbsp;以下執筆中&nbsp;<img src="img/caution.png" width=24px>
+			</span>
+			</span>
+		</div><br><br>
+		<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF;">
+			<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+			<tr><td>minecraft:block_light_absorption</td><td>Int(0-15)</td><td>15</td><td>このブロックがどれぐらい光を遮る(透過しない)か。</td></tr>
+			<tr><td>minecraft:block_light_emission</td><td>Dec(0.0-1.0)</td><td>0.0</td><td>このブロックがどれぐらい光るか。1.0が最大光量。</td></tr>
+			<tr><td>minecraft:breakonpush</td><td>Bool</td><td>false</td><td>このブロックをピストンで押したときにこのブロックが壊れるかどうか。trueで押したときに壊れる。</td></tr>
+			<tr><td>minecraft:breakswhenhitbyarrow</td><td>Bool</td><td>false</td><td>コーラスフラワーのように矢が当たったときに壊れるようにするかどうか。trueで壊れるようになり、falseで壊れない。<br><font color="red">※チェンジログでは追加したと書いてあるのに追加されていない</font></td></tr>
+			<tr><td>minecraft:breathability</td><td>Str</td><td>"solid"</td><td>プレイヤーの頭がこのブロックで埋まったときに窒息するかどうか。"solid"で窒息、"air"で窒息しない。<br>minecraft:entity_collisionがfalseの場合はデフォルトが"air"。</td></tr>
+			<tr><td>minecraft:destroy_time</td><td>Dec</td><td>0.0</td><td>このブロックの破壊にかかる秒数。</td></tr>
+			<tr><td>minecraft:display_name</td><td>Str</td><td>　</td><td>インベントリやホットバーで表示されるこのブロックの名前。LangKeyでも指定できる。</td></tr>
+			<tr><td rowspan="2">minecraft:entity_collision</td><td>Bool</td><td>true</td><td>このブロックが接触判定(衝突判定)を持つかどうか。trueで持つ。</td></tr>
+			<td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">originの値からsizeの大きさを指定する。ジオメトリと同じ方式。<br>
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+					<tr><td>origin</td><td>Array(Dec3)</td><td>[ -8.0, 0.0, -8.0 ]</td><td>このブロックの接触判定(衝突判定)の形/大きさ決めるための基準点。</td></tr>
+					<tr><td>size</td><td>Array(Dec3)</td><td>[ 16.0, 16.0, 16.0 ]</td><td>このブロックの接触判定(衝突判定)の形/大きさ。</td></tr>
+				</table>
+				具体的な形状は直方体のみであり、階段ブロックのような複雑な接触判定(衝突判定)を作ることはできない。</div></div>
+			</td></tr>
+			<tr><td>minecraft:explosion_resistance</td><td>Dec</td><td>0.0</td><td>このブロックの爆発耐性。数字が大きいほど頑丈。</td></tr>
+			<tr><td>minecraft:flammable</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+					<tr><td>burn_odds</td><td>Int</td><td>0</td><td>このブロックが燃え尽きてなくなる確率。数字が大きいほど早く燃え尽きる。</td></tr>
+					<tr><td>flame_odds</td><td>Int</td><td>0</td><td>このブロックに炎が燃え移る・火がつく確率。数字が大きいほど燃え移りやすい。</td></tr>
+				</table></div></div>
+			</td></tr>
+			<tr><td>minecraft:friction</td><td>Dec</td><td>0.0</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">このブロックにかかる摩擦の量・方式。
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>数値の範囲</th><th>効果</th></tr>
+					<tr><td>0.1 ～ 0.5</td><td>数値が小さいほどスピードポーションのように加速するようになり、大きければソウルサンドのように減速する(0.1未満は使用不可)</td></tr>
+					<tr><td>0.6</td><td>通常の摩擦。この値を指定するぐらいならこのコンポーネントは必要ない。</td></tr>
+					<tr><td>0.7 ～ 1.0</td><td>数値が大きいほど氷の上のように長く滑る。</td></tr>
+					<tr><td>1.1</td><td>移動速度が減衰せず、歩けば歩くほど加速する。</td></tr>
+					<tr><td>1.2 ～</td><td>歩かなくとも加速する、等加速度運動。</td></tr>
+				</table></div></div>
+			</td></tr>
+			<tr><td>minecraft:geometry</td><td>Str</td><td>　</td><td>このブロックのジオメトリ。ジオメトリのidで指定する。このコンポーネントを使う場合はminecraft:material_instancesを同時に使う必要がある。</td></tr>
+			<tr><td>minecraft:immovable</td><td>Bool</td><td>false</td><td>ピストンで動かせるかどうか。trueで動かせない。</td></tr>
+			<tr><td>minecraft:infiniburn</td><td>Bool</td><td>false</td><td>ネザーラックなどのようにブロックの上の炎が永遠に燃え続けるかどうか。trueで永遠に燃え続け、falseで永遠には燃えなくなる。<br><font color="red">※チェンジログでは追加したと書いてあるのに追加されていない</font></td></tr>
+			<tr><td>minecraft:map_color</td><td>Str</td><td>　</td><td>このブロックの地図上での表示色。カラーコードで指定する。</td></tr>
+			<tr><td>minecraft:material_instances</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+					<tr><td>render_method</td><td>Str</td><td>"opaque"</td><td>このブロックのレンダー方式。"opaque"、"alpha_test"、"blend"、"double_sided"から選べる(*1)。</td></tr>
+					<tr><td>texture</td><td>Str</td><td>　</td><td>指定するテクスチャのterrainID。</td></tr>
+				</table>
+				(*1)<br>
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>備考</th></tr>
+					<tr><td>opaque</td><td>テクスチャの透明度を無視してすべて不透過にする。完全に透明な部分(=色がない部分)は黒になる。</td></tr>
+					<tr><td>alpha_test</td><td>テクスチャの完全に透明な部分のみを透明にする。</td></tr>
+					<tr><td>blend</td><td>テクスチャの透明度に応じて透明にしたり半透明にしたり不透明にしたりする。</td></tr>
+					<tr><td>double_sided</td><td>基本はopaqueと同じ。ただしブロックの内側にも描画する(opaqueの場合、ブロックの一面を透明にして不透明な面の内側を見ると透けてしまう)。</td></tr>
+				</table>
+				</div></div>
+			</td></tr>
+			<tr><td>minecraft:onlypistonpush</td><td>Bool</td><td>false</td><td>粘着ピストンで引けるかどうか。trueで引けない。他の粘着ブロックにも同様に機能するはず。</td></tr>
+			<tr><td rowspan="2">minecraft:pick_collision</td><td>Bool</td><td>true</td><td>このブロックが選択判定を持つかどうか。falseで空気のように選択できなくなる(そのブロックに照準をあわせてそのブロック自身を壊したり隣にブロックを置いたりできなくなる)。</td></tr>
+			<td>Obj</td><td>0.0</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">originの値からsizeの大きさを指定する。ジオメトリと同じ方式。<br>
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+					<tr><td>origin</td><td>Array(Dec3)</td><td>[ -8.0, 0.0, -8.0 ]</td><td>このブロックの選択判定の形/大きさ決めるための基準点。</td></tr>
+					<tr><td>size</td><td>Array(Dec3)</td><td>[ 16.0, 16.0, 16.0 ]</td><td>このブロックの選択判定の形/大きさ。</td></tr>
+				</table>
+				具体的な形状は直方体のみであり、階段ブロックのような複雑な接触判定(衝突判定)を作ることはできない。</div></div>
+			</td></tr>
+			<tr><td>minecraft:placement_filter</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>型</th><th>備考</th></tr>
+					<tr><td>conditions</td><td>Array(Obj)</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">
+						<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+							<tr><th>名前</th><th>型</th><th>備考</th></tr>
+							<tr><td>allowed_faces</td><td>Array(Str)</td><td>どの面に接するように置けるか。どの面に接していれば残っていられるか。"up"(上面)、"down"(下面)、"north"(北面)、"south"(南面)、"east"(東面)、"west"(西面)、"side"(横面)、"all"(全面)のうちから一つ以上選択。面を指定しない場合はこのプロパティ１行分必要ない。upのみを指定すれば他のブロックの上面にしかこのブロックを置けなくなる。</td></tr>
+							<tr><td>block_filter</td><td>Array(Str)</td><td>どのブロックに接して置けるか。どのブロックに接していれば残っていられるか。idでいくつか指定。ブロックを指定しない場合はこのプロパティ１行分必要ない。</td></tr>
+						</table></div></div>
+					</td></tr>
+				</table></div></div><br>たとえば、草ブロックと土の上面と石の北面と南面にのみ置けるようにするならコンポーネント全体はこのようになる。
+				<pre><code class="json">"minecraft:placement_filter": {
+  "conditions": [
+    {
+      "allowed_faces": [ "up" ],
+      "block_filter": [ "minecraft:dirt", "minecraft:grass" ]
+    },
+    {
+      "allowed_faces": [ "north", "south" ],
+      "block_filter": [ "minecraft:stone" ]
+    }
+  ]
+}</code></pre>
+			</td></tr>
+			<tr><td>minecraft:preventsjumping</td><td>Bool</td><td>false</td><td>このブロックの上でジャンプできるかどうか。trueでハチミツブロックの上のようにジャンプできなくなる。</td></tr>
+			<tr><td>minecraft:random_ticking</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">originの値からsizeの大きさを指定する。ジオメトリと同じ方式。<br>
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+					<tr><td>on_tick</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">originの値からsizeの大きさを指定する。ジオメトリと同じ方式。<br>
+						<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+							<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+							<tr><td>origin</td><td>Array(Dec3)</td><td>[ -8.0, 0.0, -8.0 ]</td><td>このブロックの選択判定の形/大きさ決めるための基準点。</td></tr>
+							<tr><td>size</td><td>Array(Dec3)</td><td>[ 16.0, 16.0, 16.0 ]</td><td>このブロックの選択判定の形/大きさ。</td></tr>
+						</table></div></div>
+					</td></tr>
+				</table></div></div>
+			</td></tr>
+			<tr><td>minecraft:rotation</td><td>Array(Int3)</td><td>[ 0, 0, 0 ]</td><td>ブロックの向き。アレイ内のそれぞれの要素は0, 90, 180, 270, 360から選択でき、左からそれぞれx,y,z軸を回転軸として指定した角度だけモデル(ジオメトリ)と全面のテクスチャ回転させる。</td></tr>
+			<tr><td>minecraft:ticking</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">originの値からsizeの大きさを指定する。ジオメトリと同じ方式。<br>
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+					<tr><td>condition</td><td>Str(Molang)</td><td>　</td><td>イベントを起こす条件</td></tr>
+					<tr><td>event</td><td>Str</td><td>　</td><td>起こすイベント名</td></tr>
+					<tr><td>target</td><td>Str</td><td>　</td><td>イベントを起こすターゲット</td></tr>
+				</table></div></div>
+			</td></tr>
+			<tr><td>minecraft:unit_cube</td><td>Obj</td><td>　</td><td>テッセレーションを行うユニットのキューブを指定します。本来テッセレーションとは、3Dゲームにおいて球などの曲面に対して、そのオブジェクトに近づいたときはより滑らかに、離れたときは処理を軽減するために大まかにレンダリングする(ために使う方法の)ことですが、あってもなくても分かりやすい違いはないので基本はなくていいと思います。<br>使う際はオブジェクトの中身を空にして使います。
+			<pre><code class="json">"minecraft:unit_cube": {}</code></pre>
+			</td></tr>
+			<tr><td>minecraft:unwalkable</td><td>Bool</td><td>false</td><td>このブロックの上を越せるかどうか。trueにするとフェンスのように上を越せなくなる。</td></tr>
+		</table>
+		</div>
+		<!--
+minecraft:random_ticking 	JSON Object 		Describes the component that will trigger an even at a regular interval between two values
+Name 	Type 	Default Value 	Description
+Trigger 			on_tick
+Name 	Type 	Default Value 	Description
+condition 	String 	1 	The condition of event to be executed on the block.
+event 	String 	set_block_property 	The type of event executed on the block.
+range 	Array 	[10, 10] 	The Range between which the component will trigger his event.
+target 	String 	self 	The target of event executed on the block.
+minecraft:ticking 	JSON Object 		Describes the component that will trigger an even at a regular interval between two values
+Name 	Type 	Default Value 	Description
+Trigger 			on_tick
+Name 	Type 	Default Value 	Description
+condition 	String 	1 	The condition of event to be executed on the block.
+event 	String 	set_block_property 	The type of event executed on the block.
+range 	Array 	[10, 10] 	The Range between which the component will trigger his event.
+target 	String 	self 	The target of event executed on the block.
+looping 	Boolean 	true 	Does the event loop
+range 	Array 	[10, 10] 	The Range between which the component will trigger his event.
+		-->
+		
+		<div style="margin: 2em;">　</div>
+		
+		<div style="text-align: right; margin: 0.5em;"><span style="font-size: 70%;">© Rinca Hayamine 2021</span></div>
+	</body>
+</html>
