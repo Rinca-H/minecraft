@@ -190,27 +190,7 @@
 }</code></pre>
 			</td></tr>
 			<tr><td>minecraft:preventsjumping</td><td>Bool</td><td>false</td><td>このブロックの上でジャンプできるかどうか。trueでハチミツブロックの上のようにジャンプできなくなる。</td></tr>
-			<tr><td>minecraft:random_ticking</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">originの値からsizeの大きさを指定する。ジオメトリと同じ方式。<br>
-				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
-					<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
-					<tr><td>on_tick</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">originの値からsizeの大きさを指定する。ジオメトリと同じ方式。<br>
-						<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
-							<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
-							<tr><td>origin</td><td>Array(Dec3)</td><td>[ -8.0, 0.0, -8.0 ]</td><td>このブロックの選択判定の形/大きさ決めるための基準点。</td></tr>
-							<tr><td>size</td><td>Array(Dec3)</td><td>[ 16.0, 16.0, 16.0 ]</td><td>このブロックの選択判定の形/大きさ。</td></tr>
-						</table></div></div>
-					</td></tr>
-				</table></div></div>
-			</td></tr>
 			<tr><td>minecraft:rotation</td><td>Array(Int3)</td><td>[ 0, 0, 0 ]</td><td>ブロックの向き。アレイ内のそれぞれの要素は0, 90, 180, 270, 360から選択でき、左からそれぞれx,y,z軸を回転軸として指定した角度だけモデル(ジオメトリ)と全面のテクスチャ回転させる。</td></tr>
-			<tr><td>minecraft:ticking</td><td>Obj</td><td>　</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">originの値からsizeの大きさを指定する。ジオメトリと同じ方式。<br>
-				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
-					<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
-					<tr><td>condition</td><td>Str(Molang)</td><td>　</td><td>イベントを起こす条件</td></tr>
-					<tr><td>event</td><td>Str</td><td>　</td><td>起こすイベント名</td></tr>
-					<tr><td>target</td><td>Str</td><td>　</td><td>イベントを起こすターゲット</td></tr>
-				</table></div></div>
-			</td></tr>
 			<tr><td>minecraft:unit_cube</td><td>Obj</td><td>　</td><td>テッセレーションを行うユニットのキューブを指定します。本来テッセレーションとは、3Dゲームにおいて球などの曲面に対して、そのオブジェクトに近づいたときはより滑らかに、離れたときは処理を軽減するために大まかにレンダリングする(ために使う方法の)ことですが、あってもなくても分かりやすい違いはないので基本はなくていいと思います。<br>使う際はオブジェクトの中身を空にして使います。
 			<pre><code class="json">"minecraft:unit_cube": {}</code></pre>
 			</td></tr>
@@ -221,7 +201,36 @@
       　イベントを実行することができるコンポーネントの一覧です。
     </p>
     <table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF;">
-			<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+			<tr><th>名前</th><th>備考</th></tr>
+      <tr><td>minecraft:block_light_absorption</td><td>このブロックがどれぐらい光を遮る(透過しない)か。</td></tr>
+      <tr><td>minecraft:random_ticking</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>備考</th></tr>
+					<tr><td>on_tick</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">
+						<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+							<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+							<tr><td>condition</td><td>Str(Molang)</td><td>"(1.0)"</td><td>イベントが実行される条件。</td></tr>
+							<tr><td>event</td><td>Str</td><td> </td><td>実行するイベント。</td></tr>
+              <tr><td>target</td><td>Str</td><td>"self"</td><td>イベントを実行するターゲット。</td></tr>
+						</table></div></div>
+					</td></tr>
+				</table></div></div>
+			</td></tr>
+      <tr><td>minecraft:ticking</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">
+				<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+					<tr><th>名前</th><th>型</th><th>備考</th></tr>
+          <tr><td>looping</td><td>Bool</td><td>ループするかどうか。</td></tr>
+					<tr><td>on_tick</td><td>Obj</td><td style="max-width: 300px;"><div style="overflow-x: scroll;"><div style="min-width: 700px;">
+						<table border="1" style="border: solid 3px #000; border-collapse:collapse; background: #FFFCEF; margin: 0.5em;">
+							<tr><th>名前</th><th>型</th><th>デフォルト値</th><th>備考</th></tr>
+							<tr><td>condition</td><td>Str(Molang)</td><td>"(1.0)"</td><td>イベントが実行される条件。</td></tr>
+							<tr><td>event</td><td>Str</td><td> </td><td>実行するイベント。</td></tr>
+              <tr><td>target</td><td>Str</td><td>"self"</td><td>イベントを実行するターゲット。</td></tr>
+						</table></div></div>
+					</td></tr>
+          <tr><td>range</td><td>Array(Dec2)</td><td>カウントのばらつきの範囲。値をそろえるとばらつかなくなる。</td></tr>
+				</table></div></div>
+			</td></tr>
     </table>
 		</div>
 		<!--
