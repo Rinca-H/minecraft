@@ -11,6 +11,10 @@ table {
   border-collapse: collapse;
 }
 
+pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
 .dir {
 	background: #595959;
 	color: #64ec86;
